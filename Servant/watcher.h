@@ -26,6 +26,7 @@ public slots:
 private:
     void changePath(QString &newPath);
     void addPathRecursive(QString &path);
+    void removeAllPaths();
 
     QString wDir;
     QString wExt;

@@ -26,13 +26,13 @@ void Widget::on_inputDir_editingFinished()
 
 void Widget::on_inputExt_editingFinished()
 {
-    QString extString = ui->inputDir->text();
+    QString extString = ui->inputExt->text();
     emit ext_changed(extString);
 }
 
 void Widget::on_inputCmd_editingFinished()
 {
-    QString cmdString = ui->inputDir->text();
+    QString cmdString = ui->inputCmd->text();
     emit cmd_changed(cmdString);
 }
 

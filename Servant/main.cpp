@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     Watcher watcher;
     watcher.setDefaultExtension(QString("*"));
-    watcher.setDefaultDir(QString("E:\\Documents\\test"));
+    watcher.setDefaultDir(QString("E:/Documents/test"));
     watcher.setDefaultCommand(QString("echo"));
 
     QDir defaultDir(watcher.getDefaultDir());
@@ -26,13 +26,9 @@ int main(int argc, char *argv[])
     watcher.addPaths(filesToWatch);
     watcher.addPath(defaultDir.path());
 
-    QStringList dirsList = watcher.directories();
-    Q_FOREACH(QString dir, dirsList)
-        qDebug("Directory %s", dir.toUtf8().constData());
-
-    QStringList filesList = watcher.files();
+    /*QStringList filesList = watcher.files();
     Q_FOREACH(QString file, filesList)
-        qDebug("File %s", file.toUtf8().constData());
+        qDebug("File %s", file.toUtf8().constData());*/
 
 
     QObject::connect(&watcher, &Watcher::fileChanged,
