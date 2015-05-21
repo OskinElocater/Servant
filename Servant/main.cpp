@@ -10,26 +10,13 @@ int main(int argc, char *argv[])
     Widget widget;
     widget.show();
 
-    Watcher watcher;
-    watcher.setDefaultExtension(QString("*"));
-    watcher.setDefaultDir(QString("E:/Documents/test"));
-    watcher.setDefaultCommand(QString("echo"));
+    Watcher watcher;    
 
-    QDir defaultDir(watcher.getDefaultDir());
-    QStringList filter(QString("*.%1").arg(watcher.getDefaultExtension()));
-    QStringList filesInDefDir = defaultDir.entryList(filter, QDir::Filter::Files);
-    QStringList filesToWatch;
+    QObject::connect(&watcher, &Watcher::fileChanged,
+                     &watcher, &Watcher::on_file_changed);
 
-    Q_FOREACH(QString file, filesInDefDir)
-        filesToWatch.append(defaultDir.absoluteFilePath(file));
-
-    watcher.addPaths(filesToWatch);
-    watcher.addPath(defaultDir.path());
-
-    /*QStringList filesList = watcher.files();
-    Q_FOREACH(QString file, filesList)
-        qDebug("File %s", file.toUtf8().constData());*/
-
+    QObject::connect(&watcher, &Watcher::directoryChanged,
+                     &watcher, &Watcher::on_dir_changed);
 
     QObject::connect(&watcher, &Watcher::fileChanged,
                      &widget, &Widget::fileChanged);
@@ -37,14 +24,37 @@ int main(int argc, char *argv[])
     QObject::connect(&watcher, &Watcher::directoryChanged,
                      &widget, &Widget::directoryChanged);
 
+    QObject::connect(&watcher, &Watcher::pathUpdated,
+                     &widget, &Widget::pathUpdated);
+
     QObject::connect(&widget, &Widget::dir_changed,
                      &watcher, &Watcher::dir_changed);
 
-    QObject::connect(&widget, &Widget::ext_changed,
-                     &watcher, &Watcher::ext_changed);
+    QObject::connect(&widget, &Widget::dir_filters_changed,
+                     &watcher, &Watcher::dir_filters_changed);
+
+    QObject::connect(&widget, &Widget::file_filters_changed,
+                     &watcher, &Watcher::file_filters_changed);
 
     QObject::connect(&widget, &Widget::cmd_changed,
                      &watcher, &Watcher::cmd_changed);
+
+    QObject::connect(&widget, &Widget::args_changed,
+                     &watcher, &Watcher::args_changed);
+
+    watcher.setDefaultDirFilters(QStringList("Exported"));
+    watcher.setDefaultFileFilters(QStringList("*.obj"));
+    watcher.setDefaultDir(QString("E:/Documents/Work/Cars"));
+    watcher.setDefaultCommand(QString("python"));
+    watcher.setDefaultArgs(QStringList(""));
+
+    widget.initFields(watcher.getDefaultDir(),
+                      watcher.getDefaultDirFilters(),
+                      watcher.getDefaultFileFilters(),
+                      watcher.getDefaultCommand(),
+                      watcher.getDefaultArgs());
+
+    watcher.init();
 
     return a.exec();
 }

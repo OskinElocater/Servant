@@ -267,8 +267,28 @@ release\moc_widget.cpp: ..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QWidget \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfiledevice.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvector2d.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qtouchdevice.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QFileSystemWatcher \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfilesystemwatcher.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidget \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreeview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qframe.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvalidator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qregularexpression.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qicon.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyle.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabbar.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabwidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qrubberband.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidgetitemiterator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidgetItem \
 		..\Servant\widget.h
 	E:\Code\Qt\5.4\msvc2013_opengl\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -IE:/Code/Qt/5.4/msvc2013_opengl/mkspecs/win32-msvc2013 -IE:/Code/Servant/Servant -IE:/Code/Qt/5.4/msvc2013_opengl/include -IE:/Code/Qt/5.4/msvc2013_opengl/include/QtWidgets -IE:/Code/Qt/5.4/msvc2013_opengl/include/QtGui -IE:/Code/Qt/5.4/msvc2013_opengl/include/QtCore -I. ..\Servant\widget.h -o release\moc_widget.cpp
 
@@ -376,7 +396,31 @@ release\moc_watcher.cpp: ..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QFileSystem
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfiledevice.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvector2d.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qtouchdevice.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QProcess \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qprocess.h \
 		..\Servant\widget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidget \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreeview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qframe.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvalidator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qregularexpression.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qicon.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyle.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabbar.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabwidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qrubberband.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidgetitemiterator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidgetItem \
 		..\Servant\watcher.h
 	E:\Code\Qt\5.4\msvc2013_opengl\bin\moc.exe $(DEFINES) -D_MSC_VER=1800 -D_WIN32 -IE:/Code/Qt/5.4/msvc2013_opengl/mkspecs/win32-msvc2013 -IE:/Code/Servant/Servant -IE:/Code/Qt/5.4/msvc2013_opengl/include -IE:/Code/Qt/5.4/msvc2013_opengl/include/QtWidgets -IE:/Code/Qt/5.4/msvc2013_opengl/include/QtGui -IE:/Code/Qt/5.4/msvc2013_opengl/include/QtCore -I. ..\Servant\watcher.h -o release\moc_watcher.cpp
 
@@ -503,8 +547,33 @@ release\main.obj: ..\Servant\main.cpp ..\Servant\widget.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfiledevice.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvector2d.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qtouchdevice.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidget \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreeview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qframe.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvalidator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qregularexpression.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qicon.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyle.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabbar.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabwidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qrubberband.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidgetitemiterator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidgetItem \
+		..\Servant\watcher.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QFileSystemWatcher \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfilesystemwatcher.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QProcess \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qprocess.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QApplication \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qapplication.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qcoreapplication.h \
@@ -619,13 +688,32 @@ release\widget.obj: ..\Servant\widget.cpp ..\Servant\widget.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfiledevice.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvector2d.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qtouchdevice.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QFileSystemWatcher \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfilesystemwatcher.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidget \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreeview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qframe.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvalidator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qregularexpression.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qicon.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyle.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabbar.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabwidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qrubberband.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidgetitemiterator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidgetItem \
 		ui_widget.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QVariant \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QAction \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qaction.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qicon.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qactiongroup.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QApplication \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qapplication.h \
@@ -643,22 +731,6 @@ release\widget.obj: ..\Servant\widget.cpp ..\Servant\widget.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qgridlayout.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QHeaderView \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qheaderview.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemview.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractscrollarea.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qframe.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qabstractitemmodel.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qitemselectionmodel.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemdelegate.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyleoption.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractspinbox.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvalidator.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qregularexpression.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qslider.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractslider.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyle.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabbar.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabwidget.h \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qrubberband.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QLabel \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qlabel.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QLineEdit \
@@ -674,7 +746,10 @@ release\widget.obj: ..\Servant\widget.cpp ..\Servant\widget.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qtextdocument.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QVBoxLayout \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QProcess \
-		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qprocess.h
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qprocess.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QDir \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qdir.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfileinfo.h
 
 release\watcher.obj: ..\Servant\watcher.cpp ..\Servant\watcher.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QFileSystemWatcher \
@@ -781,7 +856,34 @@ release\watcher.obj: ..\Servant\watcher.cpp ..\Servant\watcher.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfiledevice.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvector2d.h \
 		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qtouchdevice.h \
-		..\Servant\widget.h
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QProcess \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qprocess.h \
+		..\Servant\widget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidget \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreeview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemview.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractscrollarea.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qframe.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qabstractitemmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qitemselectionmodel.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractitemdelegate.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyleoption.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractspinbox.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qvalidator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qregularexpression.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtGui\qicon.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qabstractslider.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qstyle.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabbar.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtabwidget.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qrubberband.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\qtreewidgetitemiterator.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtWidgets\QTreeWidgetItem \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\QDir \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qdir.h \
+		..\..\Qt\5.4\msvc2013_opengl\include\QtCore\qfileinfo.h
 
 release\moc_widget.obj: release\moc_widget.cpp 
 
