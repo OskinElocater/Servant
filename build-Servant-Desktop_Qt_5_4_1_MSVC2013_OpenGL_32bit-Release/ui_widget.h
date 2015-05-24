@@ -17,8 +17,9 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
-#include <QtWidgets/QScrollArea>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QTextEdit>
+#include <QtWidgets/QToolButton>
 #include <QtWidgets/QTreeWidget>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
@@ -28,15 +29,12 @@ QT_BEGIN_NAMESPACE
 class Ui_Widget
 {
 public:
-    QScrollArea *scrollArea;
-    QWidget *scrollAreaWidgetContents;
-    QHBoxLayout *horizontalLayout_3;
-    QTextEdit *output;
     QWidget *layoutWidget;
     QVBoxLayout *verticalLayout;
     QHBoxLayout *horizontalLayout;
     QLabel *dirLabel;
     QLineEdit *inputDir;
+    QToolButton *toolButton;
     QHBoxLayout *horizontalLayout_2;
     QLabel *label_2;
     QLineEdit *inputDirFilters;
@@ -50,33 +48,17 @@ public:
     QLabel *label_3;
     QLineEdit *inputArg;
     QTreeWidget *treeWidget;
+    QPushButton *btn_settings;
+    QTextEdit *output;
 
     void setupUi(QWidget *Widget)
     {
         if (Widget->objectName().isEmpty())
             Widget->setObjectName(QStringLiteral("Widget"));
-        Widget->resize(1214, 607);
-        scrollArea = new QScrollArea(Widget);
-        scrollArea->setObjectName(QStringLiteral("scrollArea"));
-        scrollArea->setGeometry(QRect(0, 143, 761, 461));
-        scrollArea->setWidgetResizable(true);
-        scrollAreaWidgetContents = new QWidget();
-        scrollAreaWidgetContents->setObjectName(QStringLiteral("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 759, 459));
-        horizontalLayout_3 = new QHBoxLayout(scrollAreaWidgetContents);
-        horizontalLayout_3->setSpacing(6);
-        horizontalLayout_3->setContentsMargins(11, 11, 11, 11);
-        horizontalLayout_3->setObjectName(QStringLiteral("horizontalLayout_3"));
-        output = new QTextEdit(scrollAreaWidgetContents);
-        output->setObjectName(QStringLiteral("output"));
-        output->setReadOnly(true);
-
-        horizontalLayout_3->addWidget(output);
-
-        scrollArea->setWidget(scrollAreaWidgetContents);
+        Widget->resize(1146, 607);
         layoutWidget = new QWidget(Widget);
         layoutWidget->setObjectName(QStringLiteral("layoutWidget"));
-        layoutWidget->setGeometry(QRect(0, 0, 761, 136));
+        layoutWidget->setGeometry(QRect(10, 30, 701, 136));
         verticalLayout = new QVBoxLayout(layoutWidget);
         verticalLayout->setSpacing(6);
         verticalLayout->setContentsMargins(11, 11, 11, 11);
@@ -95,6 +77,11 @@ public:
         inputDir->setMaxLength(32765);
 
         horizontalLayout->addWidget(inputDir);
+
+        toolButton = new QToolButton(layoutWidget);
+        toolButton->setObjectName(QStringLiteral("toolButton"));
+
+        horizontalLayout->addWidget(toolButton);
 
 
         verticalLayout->addLayout(horizontalLayout);
@@ -164,11 +151,15 @@ public:
         verticalLayout->addLayout(horizontalLayout_6);
 
         treeWidget = new QTreeWidget(Widget);
-        QTreeWidgetItem *__qtreewidgetitem = new QTreeWidgetItem();
-        __qtreewidgetitem->setText(0, QStringLiteral("1"));
-        treeWidget->setHeaderItem(__qtreewidgetitem);
         treeWidget->setObjectName(QStringLiteral("treeWidget"));
-        treeWidget->setGeometry(QRect(770, 0, 441, 601));
+        treeWidget->setGeometry(QRect(720, 10, 421, 591));
+        btn_settings = new QPushButton(Widget);
+        btn_settings->setObjectName(QStringLiteral("btn_settings"));
+        btn_settings->setGeometry(QRect(10, 0, 101, 23));
+        output = new QTextEdit(Widget);
+        output->setObjectName(QStringLiteral("output"));
+        output->setGeometry(QRect(10, 170, 701, 431));
+        output->setReadOnly(true);
 
         retranslateUi(Widget);
 
@@ -179,10 +170,12 @@ public:
     {
         Widget->setWindowTitle(QApplication::translate("Widget", "Widget", 0));
         dirLabel->setText(QApplication::translate("Widget", "Working Directory", 0));
+        toolButton->setText(QApplication::translate("Widget", "...", 0));
         label_2->setText(QApplication::translate("Widget", "Directory filters", 0));
         label->setText(QApplication::translate("Widget", "File filters", 0));
         cmdLabel->setText(QApplication::translate("Widget", "Command", 0));
         label_3->setText(QApplication::translate("Widget", "Arguments", 0));
+        btn_settings->setText(QApplication::translate("Widget", "Rules and Settings", 0));
     } // retranslateUi
 
 };

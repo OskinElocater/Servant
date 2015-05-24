@@ -19,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Widget_t {
-    QByteArrayData data[24];
-    char stringdata[358];
+    QByteArrayData data[23];
+    char stringdata[353];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -51,8 +51,7 @@ QT_MOC_LITERAL(18, 202, 34), // "on_inputDirFilters_editingFin..."
 QT_MOC_LITERAL(19, 237, 35), // "on_inputFileFilters_editingFi..."
 QT_MOC_LITERAL(20, 273, 27), // "on_inputCmd_editingFinished"
 QT_MOC_LITERAL(21, 301, 27), // "on_inputArg_editingFinished"
-QT_MOC_LITERAL(22, 329, 23), // "on_inputDir_textChanged"
-QT_MOC_LITERAL(23, 353, 4) // "arg1"
+QT_MOC_LITERAL(22, 329, 23) // "on_btn_settings_clicked"
 
     },
     "Widget\0dir_changed\0\0QString&\0dir\0"
@@ -65,7 +64,7 @@ QT_MOC_LITERAL(23, 353, 4) // "arg1"
     "on_inputFileFilters_editingFinished\0"
     "on_inputCmd_editingFinished\0"
     "on_inputArg_editingFinished\0"
-    "on_inputDir_textChanged\0arg1"
+    "on_btn_settings_clicked"
 };
 #undef QT_MOC_LITERAL
 
@@ -98,7 +97,7 @@ static const uint qt_meta_data_Widget[] = {
       19,    0,  110,    2, 0x08 /* Private */,
       20,    0,  111,    2, 0x08 /* Private */,
       21,    0,  112,    2, 0x08 /* Private */,
-      22,    1,  113,    2, 0x08 /* Private */,
+      22,    0,  113,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
@@ -116,7 +115,7 @@ static const uint qt_meta_data_Widget[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,   23,
+    QMetaType::Void,
 
        0        // eod
 };
@@ -139,7 +138,7 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         case 10: _t->on_inputFileFilters_editingFinished(); break;
         case 11: _t->on_inputCmd_editingFinished(); break;
         case 12: _t->on_inputArg_editingFinished(); break;
-        case 13: _t->on_inputDir_textChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 13: _t->on_btn_settings_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

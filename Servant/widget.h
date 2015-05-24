@@ -34,8 +34,7 @@ private slots:
     void on_inputFileFilters_editingFinished();
     void on_inputCmd_editingFinished();    
     void on_inputArg_editingFinished();
-
-    void on_inputDir_textChanged(const QString &arg1);
+    void on_btn_settings_clicked();
 
 signals:
     void dir_changed(QString &dir);

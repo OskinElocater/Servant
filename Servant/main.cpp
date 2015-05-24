@@ -1,8 +1,10 @@
 #include "widget.h"
 #include "watcher.h"
+#include "rule.h"
 
 #include <QApplication>
 #include <QDir>
+#include <QSettings>
 
 int main(int argc, char *argv[])
 {
@@ -55,6 +57,12 @@ int main(int argc, char *argv[])
                       watcher.getDefaultArgs());
 
     watcher.init();
+
+    QCoreApplication::setApplicationName("Servant");
+    QCoreApplication::setOrganizationName("Alexander Oskin");
+    QSettings settings;
+    QList<Rule> rules(Rule());
+    settings.setValue("Rules", rules);
 
     return a.exec();
 }

@@ -65,6 +65,8 @@ void Watcher::on_file_changed(const QString &path) {
     outfile.replace(QString("obj"), QString("js"));
     args.append("-o");
     args.append(outfile);
+    args.append("-t");
+    args.append("binary");
     Q_FOREACH(QString a, args)
         qDebug(a.toUtf8().constData());
     executeCommand(wCmd, args);

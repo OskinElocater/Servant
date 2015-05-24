@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
+#include "settings.h"
 
 #include <string>
 #include <algorithm>
@@ -124,7 +125,9 @@ void Widget::updateTreeWidget(QString &path, QTreeWidgetItem *parent) {
         parent->addChild(topItem);
 }
 
-void Widget::on_inputDir_textChanged(const QString &arg1)
+void Widget::on_btn_settings_clicked()
 {
-
+    Settings settings;
+    settings.setModal(true);
+    settings.exec();
 }
