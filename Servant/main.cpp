@@ -60,9 +60,6 @@ int main(int argc, char *argv[])
 
     QCoreApplication::setApplicationName("Servant");
     QCoreApplication::setOrganizationName("Alexander Oskin");
-    QSettings settings;
-    QList<Rule> rules(Rule());
-    settings.setValue("Rules", rules);
 
     return a.exec();
 }

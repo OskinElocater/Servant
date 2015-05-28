@@ -4,50 +4,50 @@
 #include <QString>
 #include <QStringList>
 
-class Rule
+struct Rule
 {
 public:
-    Rule(QString &name = QString("rule %1").arg(Rule::id),
+    Rule(const Rule& r):
+        name(r.name),
+        workingDirectory(r.workingDirectory),
+        directoryFilters(r.directoryFilters),
+        fileFilters(r.fileFilters),
+        command(r.command),
+        arguments(r.arguments)
+    { }
+    Rule(QString &ruleName = QString("new rule"),
          QString &wdir = QString(""),
-         QStringList &dirFilters = QStringList("*"),
-         QStringList &fileFilters = QStringList("*.*"),
+         QStringList &dirFilters = QStringList(""),
+         QStringList &fileFilters = QStringList(""),
          QString &cmd = QString(""),
          QStringList &args = QStringList("")):
-        _ruleName(name),
-        _wDir(wdir),
-        _dirFilters(dirFilters),
-        _fileFilters(fileFilters),
-        _command(cmd),
-        _args(args) { id = Rule::id++; }
-    ~Rule();
+        name(ruleName),
+        workingDirectory(wdir),
+        directoryFilters(dirFilters),
+        fileFilters(fileFilters),
+        command(cmd),
+        arguments(args)
+    { }
+    ~Rule() {}
 
-    void setName(QString &name) { _ruleName = name; }
-    void setWorkingDirectory(QString &wdir) { _wDir = wdir; }
-    void setDirectoryFilters(QStringList &dirFilters) { _dirFilters = dirFilters; }
-    void setFileFilters(QStringList &fileFilters) { _fileFilters = fileFilters; }
-    void setCommand(QString &cmd) { _command = cmd; }
-    void setArguments(QStringList &args) { _args = args; }
+    bool operator==(const Rule& r) {
+        if(this->name == r.name &&
+                this->workingDirectory == r.workingDirectory &&
+                this->directoryFilters == r.directoryFilters &&
+                this->fileFilters == r.fileFilters &&
+                this->command == r.command &&
+                this->arguments == r.arguments)
+            return true;
+        else
+            return false;
+    }
 
-    int getId() { return _id; }
-    QString& getName() { return _ruleName; }
-    QString& getWorkingDirectory() { return _wDir; }
-    QStringList& getDirectoryFilters() { return _dirFilters; }
-    QStringList& getFileFilters() { return _fileFilters; }
-    QString& getCommand() { return _command; }
-    QStringList& getArguments() { return _args; }
-
-    static int id;
-
-private:
-    int _id{0};
-    QString _ruleName;
-    QString _wDir;
-    QStringList _dirFilters;
-    QStringList _fileFilters;
-    QString _command;
-    QStringList _args;
+    QString name;
+    QString workingDirectory;
+    QStringList directoryFilters;
+    QStringList fileFilters;
+    QString command;
+    QStringList arguments;
 };
-
-int Rule::id = 0;
 
 #endif // RULE_H

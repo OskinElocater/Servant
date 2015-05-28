@@ -6,6 +6,7 @@
 #include <algorithm>
 
 #include <QProcess>
+#include <QSettings>
 #include <QDir>
 
 Widget::Widget(QWidget *parent) :
@@ -127,7 +128,13 @@ void Widget::updateTreeWidget(QString &path, QTreeWidgetItem *parent) {
 
 void Widget::on_btn_settings_clicked()
 {
+    QSettings s;
     Settings settings;
+    if(s.value("IsFirstLaunch", true).toBool()) {        
+        settings.init();
+        s.setValue("IsFirstLaunch", false);
+    }
+
     settings.setModal(true);
     settings.exec();
 }
