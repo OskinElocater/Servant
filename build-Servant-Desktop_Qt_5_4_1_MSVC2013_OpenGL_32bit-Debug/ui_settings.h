@@ -47,7 +47,7 @@ public:
     QLabel *label_2;
     QLabel *label_4;
     QListWidget *listWidget;
-    QWidget *widget;
+    QWidget *layoutWidget1;
     QHBoxLayout *horizontalLayout;
     QPushButton *btn_add_rule;
     QPushButton *btn_del_rule;
@@ -131,18 +131,21 @@ public:
         listWidget = new QListWidget(tab);
         listWidget->setObjectName(QStringLiteral("listWidget"));
         listWidget->setGeometry(QRect(10, 10, 161, 251));
-        widget = new QWidget(tab);
-        widget->setObjectName(QStringLiteral("widget"));
-        widget->setGeometry(QRect(8, 270, 601, 25));
-        horizontalLayout = new QHBoxLayout(widget);
+        listWidget->setFrameShadow(QFrame::Sunken);
+        listWidget->setDragDropOverwriteMode(true);
+        listWidget->setSortingEnabled(false);
+        layoutWidget1 = new QWidget(tab);
+        layoutWidget1->setObjectName(QStringLiteral("layoutWidget1"));
+        layoutWidget1->setGeometry(QRect(8, 270, 601, 25));
+        horizontalLayout = new QHBoxLayout(layoutWidget1);
         horizontalLayout->setObjectName(QStringLiteral("horizontalLayout"));
         horizontalLayout->setContentsMargins(0, 0, 0, 0);
-        btn_add_rule = new QPushButton(widget);
+        btn_add_rule = new QPushButton(layoutWidget1);
         btn_add_rule->setObjectName(QStringLiteral("btn_add_rule"));
 
         horizontalLayout->addWidget(btn_add_rule);
 
-        btn_del_rule = new QPushButton(widget);
+        btn_del_rule = new QPushButton(layoutWidget1);
         btn_del_rule->setObjectName(QStringLiteral("btn_del_rule"));
 
         horizontalLayout->addWidget(btn_del_rule);
@@ -151,17 +154,17 @@ public:
 
         horizontalLayout->addItem(horizontalSpacer);
 
-        btn_apply = new QPushButton(widget);
+        btn_apply = new QPushButton(layoutWidget1);
         btn_apply->setObjectName(QStringLiteral("btn_apply"));
 
         horizontalLayout->addWidget(btn_apply);
 
-        btn_ok = new QPushButton(widget);
+        btn_ok = new QPushButton(layoutWidget1);
         btn_ok->setObjectName(QStringLiteral("btn_ok"));
 
         horizontalLayout->addWidget(btn_ok);
 
-        btn_cancel = new QPushButton(widget);
+        btn_cancel = new QPushButton(layoutWidget1);
         btn_cancel->setObjectName(QStringLiteral("btn_cancel"));
 
         horizontalLayout->addWidget(btn_cancel);

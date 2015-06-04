@@ -3,56 +3,23 @@
 #include <QDir>
 #include <QProcess>
 
-void Watcher::dir_changed(QString &path) {
-    if(path.begin() == path.end())
-        refreshPath(wDir);
-    else if(path != wDir)
-        refreshPath(path);
-
-    qDebug("Dir not changed!");
+void Watcher::rulesUpdated(QList<std::shared_ptr<Rule>> rules) {
+    qDebug("Watcher: Rules updated!");
+    Q_FOREACH(auto& rule, rules) {
+        qDebug("Updating rule named %s", rule->name.toUtf8().constData());
+        /*addRuleRecursive(*rule);
+        emit ruleUpdated(*rule);*/
+    }
 }
 
-void Watcher::dir_filters_changed(QStringList &filters) {
-    if(wDirFilters == filters)
-        return;
-
-    wDirFilters = filters;
-    refreshPath(wDir);
-
-    qDebug("Dir Filters changed to ");
-    Q_FOREACH(QString filter, filters)
-            qDebug(filter.toUtf8().constData());
-}
-
-void Watcher::file_filters_changed(QStringList &filters) {
-    if(wFileFilters == filters)
-        return;
-
-    wFileFilters = filters;
-    refreshPath(wDir);
-
-    qDebug("File Filters changed to ");
-    Q_FOREACH(QString filter, filters)
-        qDebug(filter.toUtf8().constData());
-}
-
-void Watcher::cmd_changed(QString &cmd) {
-    if(wCmd == cmd)
-        return;
-
-    wCmd = cmd;
-    qDebug("Command changed!");
-}
-
-void Watcher::args_changed(QStringList &args) {
-    wArgs = args;
-    qDebug("Arguments changed!");
+void Watcher::stopWatching() {
+    removeAllPaths();
+    _rules.clear();
 }
 
 void Watcher::on_dir_changed(const QString &path) {
     qDebug("DIR CHANGED!");
     QString p = path;
-    refreshPath(p);
 }
 
 void Watcher::on_file_changed(const QString &path) {
@@ -81,18 +48,48 @@ void Watcher::executeCommand(QString &cmd, QStringList &args) {
     //qDebug("%i", err);
 }
 
+void Watcher::addRuleRecursive(Rule &rule) {
+    QDir newDir(rule.workingDirectory);
 
-void Watcher::refreshPath(QString &newPath) {
-    removeAllPaths();
+    QStringList dirs = newDir.entryList(QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot);
 
-    this->addPathRecursive(newPath);
+    this->addPath(rule.workingDirectory);
+    //qDebug(path.toUtf8().constData());
 
-    wDir = newPath;
+    Q_FOREACH(QString dir, dirs) {
+        QString fullDir = QString("%1/%2").arg(rule.workingDirectory, dir.toUtf8().constData());
+        Rule newRule(rule.id,
+                     rule.name,
+                     rule.workingDirectory,
+                     rule.directoryFilters,
+                     rule.fileFilters,
+                     rule.command,
+                     rule.arguments);
+        addRuleRecursive(newRule);
+    }
 
-    emit pathUpdated(newPath);
+    QStringList filesToAdd;
+    Q_FOREACH(QString filter, rule.directoryFilters)
+    if(newDir.dirName() == filter) {
+        Q_FOREACH(QString file,
+                  newDir.entryList(rule.fileFilters,
+                                   QDir::Filter::Files | QDir::Filter::NoDotAndDotDot))
+        {
+            qDebug(newDir.absoluteFilePath(file).toUtf8().constData());
+            filesToAdd.append(newDir.absoluteFilePath(file));
+        }
+    }
+
+    /*QStringList filesWatched = this->files();
+    Q_FOREACH(QString file, filesWatched)
+        qDebug(file.toUtf8().constData());*/
+    if(filesToAdd.empty())
+        qDebug("Skipping %s", rule.workingDirectory.toUtf8().constData());
+    else
+       this->addPaths(filesToAdd);
 }
 
-void Watcher::addPathRecursive(QString &path) {
+/*void Watcher::addPathRecursive(QString &path) {
     QDir newDir(path);
 
     QStringList dirs = newDir.entryList(QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot);
@@ -117,14 +114,11 @@ void Watcher::addPathRecursive(QString &path) {
         }
     }
 
-    /*QStringList filesWatched = this->files();
-    Q_FOREACH(QString file, filesWatched)
-        qDebug(file.toUtf8().constData());*/    
     if(filesToAdd.empty())
         qDebug("Skipping %s", path.toUtf8().constData());
     else
        this->addPaths(filesToAdd);
-}
+}*/
 
 void Watcher::removeAllPaths() {
     Q_FOREACH(QString dir, this->directories())

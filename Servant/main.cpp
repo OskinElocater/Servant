@@ -1,5 +1,6 @@
 #include "widget.h"
 #include "watcher.h"
+#include "settings.h"
 #include "rule.h"
 
 #include <QApplication>
@@ -26,37 +27,11 @@ int main(int argc, char *argv[])
     QObject::connect(&watcher, &Watcher::directoryChanged,
                      &widget, &Widget::directoryChanged);
 
-    QObject::connect(&watcher, &Watcher::pathUpdated,
-                     &widget, &Widget::pathUpdated);
+    QObject::connect(&watcher, &Watcher::ruleUpdated,
+                     &widget, &Widget::onRuleUpdated);
 
-    QObject::connect(&widget, &Widget::dir_changed,
-                     &watcher, &Watcher::dir_changed);
-
-    QObject::connect(&widget, &Widget::dir_filters_changed,
-                     &watcher, &Watcher::dir_filters_changed);
-
-    QObject::connect(&widget, &Widget::file_filters_changed,
-                     &watcher, &Watcher::file_filters_changed);
-
-    QObject::connect(&widget, &Widget::cmd_changed,
-                     &watcher, &Watcher::cmd_changed);
-
-    QObject::connect(&widget, &Widget::args_changed,
-                     &watcher, &Watcher::args_changed);
-
-    watcher.setDefaultDirFilters(QStringList("Exported"));
-    watcher.setDefaultFileFilters(QStringList("*.obj"));
-    watcher.setDefaultDir(QString("E:/Documents/Work/Cars"));
-    watcher.setDefaultCommand(QString("python"));
-    watcher.setDefaultArgs(QStringList(""));
-
-    widget.initFields(watcher.getDefaultDir(),
-                      watcher.getDefaultDirFilters(),
-                      watcher.getDefaultFileFilters(),
-                      watcher.getDefaultCommand(),
-                      watcher.getDefaultArgs());
-
-    watcher.init();
+    QObject::connect(&widget, &Widget::rulesUpdated,
+                     &watcher, &Watcher::rulesUpdated);
 
     QCoreApplication::setApplicationName("Servant");
     QCoreApplication::setOrganizationName("Alexander Oskin");

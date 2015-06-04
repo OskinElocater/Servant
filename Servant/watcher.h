@@ -24,26 +24,26 @@ public:
     QString& getDefaultCommand() { return wCmd; }
     QStringList& getDefaultArgs() { return wArgs; }
 
-    void init() { refreshPath(wDir); }
 public slots:
-    void dir_changed(QString &path);
-    void dir_filters_changed(QStringList &filters);
-    void file_filters_changed(QStringList &filters);
-    void cmd_changed(QString &cmd);
-    void args_changed(QStringList &args);
-
     void on_file_changed(const QString &path);
     void on_dir_changed(const QString &path);
 
+    void rulesUpdated(QList<std::shared_ptr<Rule> > rules);
+    void stopWatching();
+
 signals:
-    void pathUpdated(QString &path);
+    void ruleUpdated(Rule &rule);
 
 private:
-    void refreshPath(QString &newPath);
-    void addPathRecursive(QString &path);
+    void loadRules();
+
+    void addRuleRecursive(Rule &rule);
+    //void addPathRecursive(QString &path);
     void removeAllPaths();
 
     void executeCommand(QString &cmd, QStringList &args);
+
+    QMap<QString, std::shared_ptr<Rule>> _rules;
 
     QString wDir;
     QStringList wFileFilters;

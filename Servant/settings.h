@@ -9,6 +9,11 @@
 #include <QListWidget>
 #include <QListWidgetItem>
 
+using std::shared_ptr;
+using std::make_shared;
+
+typedef shared_ptr<Rule> RuleS;
+
 namespace Ui {
 class Settings;
 }
@@ -19,9 +24,16 @@ class Settings : public QDialog
 
 public:
     explicit Settings(QWidget *parent = 0);
+
     ~Settings();    
 
     void init();
+
+    QList<RuleS> getRules() { return _rules.values(); }
+    Rule getRuleById(int id) { return *_rules[id]; }
+
+signals:
+    void rulesUpdated(QList<RuleS> rules);
 
 private slots:
 
@@ -57,11 +69,11 @@ private slots:
     void on_listWidget_currentTextChanged(const QString &currentText);
 
 private:
-    void loadRules();
-    void saveRules();
 
-    std::shared_ptr<Rule> _currentRule;
-    QMap<QString, std::shared_ptr<Rule>> _rules;
+    RuleS _currentRule;
+    QMap<int, RuleS> _rules;
+
+    bool _wereRulesUpdated{false};
 
     Ui::Settings *ui;
 };

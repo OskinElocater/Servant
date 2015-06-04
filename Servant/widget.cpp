@@ -1,6 +1,6 @@
 #include "widget.h"
 #include "ui_widget.h"
-#include "settings.h"
+#include "settingsloader.h"
 
 #include <string>
 #include <algorithm>
@@ -9,11 +9,13 @@
 #include <QSettings>
 #include <QDir>
 
+using namespace std;
+
 Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
-    ui->setupUi(this);
+    ui->setupUi(this);    
 }
 
 Widget::~Widget()
@@ -21,79 +23,30 @@ Widget::~Widget()
     delete ui;
 }
 
-void Widget::initFields(QString &dir,
-                        QStringList &dirFilters,
-                        QStringList &fileFilters,
-                        QString &cmd,
-                        QStringList &args) {
-    ui->inputDir->clear();
-    ui->inputDir->insert(dir);
-
-    ui->inputDirFilters->clear();
-    ui->inputDirFilters->insert(dirFilters.join(", "));
-
-    ui->inputFileFilters->clear();
-    ui->inputFileFilters->insert(fileFilters.join(", "));
-
-    ui->inputCmd->clear();
-    ui->inputCmd->insert(cmd);
-
-    ui->inputArg->clear();
-    ui->inputArg->insert(args.join(", "));
-}
-
-void Widget::on_inputDir_editingFinished()
-{
-    QString dirString = ui->inputDir->text();
-    emit dir_changed(dirString);
-}
-
-void Widget::on_inputDirFilters_editingFinished()
-{
-    QString filtersString = ui->inputDirFilters->text();
-    QStringList filters = filtersString.split(", ", QString::SkipEmptyParts);
-    emit dir_filters_changed(filters);
-}
-
-void Widget::on_inputFileFilters_editingFinished()
-{
-    QString filtersString = ui->inputFileFilters->text();
-    QStringList filters = filtersString.split(", ", QString::SkipEmptyParts);
-    emit file_filters_changed(filters);
-}
-
-void Widget::on_inputCmd_editingFinished()
-{
-    QString cmdString = ui->inputCmd->text();
-    emit cmd_changed(cmdString);
-}
-
-void Widget::on_inputArg_editingFinished()
-{
-    QString argsString = ui->inputArg->text();
-    QStringList args = argsString.split(", ", QString::SkipEmptyParts);
-    emit args_changed(args);
-}
-
 void Widget::fileChanged(const QString &path)
 {
     //qDebug("File %s changed!", path.toUtf8().constData());
-    ui->output->append(path);
+    ui->output->append(path + QString(" is changed."));
 }
 
 void Widget::directoryChanged(const QString &path)
 {
     //qDebug("Dir %s changed!", path.toUtf8().constData());
-    ui->output->append(path);
+    ui->output->append(path + QString(" is changed."));
 }
 
-void Widget::pathUpdated(QString &path) {
+void Widget::onRuleUpdated(Rule &rule) {
     ui->treeWidget->clear();
-    updateTreeWidget(path, Q_NULLPTR);
+    updateTreeWidgetWithRule(rule, Q_NULLPTR);
 }
 
-void Widget::updateTreeWidget(QString &path, QTreeWidgetItem *parent) {
-    QDir newDir(path);
+void Widget::onRulesUpdated(QList<shared_ptr<Rule>> rules) {
+    qDebug("Widget: Rules Updated!");
+    emit rulesUpdated(rules);
+}
+
+void Widget::updateTreeWidgetWithRule(Rule &rule, QTreeWidgetItem *parent) {
+    QDir newDir(rule.workingDirectory);
     QTreeWidgetItem *topItem = new QTreeWidgetItem();
     topItem->setText(0, newDir.dirName());
 
@@ -101,15 +54,51 @@ void Widget::updateTreeWidget(QString &path, QTreeWidgetItem *parent) {
 
     Q_FOREACH(QString dir, dirs) {
         //qDebug(dir.toUtf8().constData());
-        updateTreeWidget(QString("%1/%2").arg(path, dir), topItem);
+        Rule newRule(rule.id, rule.name, dir, rule.directoryFilters, rule.fileFilters,
+                     rule.command, rule.arguments);
+        updateTreeWidgetWithRule(newRule, topItem);
     }
 
-    QString filtersString = ui->inputDirFilters->text();
-    QStringList filters = filtersString.split(", ", QString::SkipEmptyParts);
+    QStringList filters = rule.directoryFilters;
     Q_FOREACH(QString filter, filters)
         if(newDir.dirName() == filter) {
-            QString fileFiltersString = ui->inputFileFilters->text();
-            QStringList fileFilters = fileFiltersString.split(", ", QString::SkipEmptyParts);
+            QStringList fileFilters = rule.fileFilters;
+            Q_FOREACH(QString file,
+                      newDir.entryList(fileFilters,
+                                       QDir::Filter::Files | QDir::Filter::NoDotAndDotDot))
+            {
+                QTreeWidgetItem *fileItem = new QTreeWidgetItem();
+                fileItem->setText(0, file);
+                topItem->addChild(fileItem);
+            }
+        }
+
+    if(parent == Q_NULLPTR)
+        ui->treeWidget->addTopLevelItem(topItem);
+    else if(topItem->childCount() != 0)
+        parent->addChild(topItem);
+}
+
+void Widget::updateTreeWidgetWithRuleId(int &id, QTreeWidgetItem *parent) {
+    auto rules = SettingsLoader::loadRules();
+    Rule rule = *rules[id];
+    QDir newDir(rule.workingDirectory);
+    QTreeWidgetItem *topItem = new QTreeWidgetItem();
+    topItem->setText(0, newDir.dirName());
+
+    QStringList dirs = newDir.entryList(QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot);
+
+    Q_FOREACH(QString dir, dirs) {
+        //qDebug(dir.toUtf8().constData());
+        Rule newRule(rule.id, rule.name, dir, rule.directoryFilters, rule.fileFilters,
+                     rule.command, rule.arguments);
+        updateTreeWidgetWithRule(newRule, topItem);
+    }
+
+    QStringList filters = rule.directoryFilters;
+    Q_FOREACH(QString filter, filters)
+        if(newDir.dirName() == filter) {
+            QStringList fileFilters = rule.fileFilters;
             Q_FOREACH(QString file,
                       newDir.entryList(fileFilters,
                                        QDir::Filter::Files | QDir::Filter::NoDotAndDotDot))
@@ -128,13 +117,32 @@ void Widget::updateTreeWidget(QString &path, QTreeWidgetItem *parent) {
 
 void Widget::on_btn_settings_clicked()
 {
-    QSettings s;
     Settings settings;
-    if(s.value("IsFirstLaunch", true).toBool()) {        
+    /*QObject::connect(&settings, &Settings::rulesUpdated,
+                     this, &Widget::onRulesUpdated);*/
+
+    QSettings s;
+    s.clear();
+    if(s.value("IsFirstLaunch", true).toBool()) {
+        qDebug("Initializing settings");
         settings.init();
         s.setValue("IsFirstLaunch", false);
     }
 
     settings.setModal(true);
     settings.exec();
+}
+
+void Widget::on_btn_start_clicked()
+{
+    Settings settings;
+    QObject::connect(&settings, &Settings::rulesUpdated,
+                     this, &Widget::onRulesUpdated);
+
+    emit rulesUpdated(SettingsLoader::loadRules().values());
+}
+
+void Widget::on_btn_stop_clicked()
+{
+    emit stopWatching();
 }

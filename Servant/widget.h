@@ -5,6 +5,8 @@
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
 
+#include "settings.h"
+
 namespace Ui {
     class Widget;
 }
@@ -17,34 +19,28 @@ public:
     explicit Widget(QWidget *parent = 0);
     ~Widget();
 
-    void initFields(QString &dir,
-                    QStringList &dirFilters,
-                    QStringList &fileFilters,
-                    QString &cmd,
-                    QStringList &args);
-
 public slots:
     void fileChanged(const QString &path);
     void directoryChanged(const QString &path);
-    void pathUpdated(QString &path);
+    void onRuleUpdated(Rule &rule);
+    void onRulesUpdated(QList<std::shared_ptr<Rule> > rules);
 
 private slots:
-    void on_inputDir_editingFinished();
-    void on_inputDirFilters_editingFinished();
-    void on_inputFileFilters_editingFinished();
-    void on_inputCmd_editingFinished();    
-    void on_inputArg_editingFinished();
     void on_btn_settings_clicked();
 
+    void on_btn_start_clicked();
+
+    void on_btn_stop_clicked();
+
 signals:
-    void dir_changed(QString &dir);
-    void file_filters_changed(QStringList &filter);
-    void dir_filters_changed(QStringList &filter);
-    void cmd_changed(QString &cmd);
-    void args_changed(QStringList &args);
+    void rulesUpdated(QList<std::shared_ptr<Rule>> rules);
+    void stopWatching();
 
 private:
-    void updateTreeWidget(QString &path, QTreeWidgetItem *parent);
+    void updateTreeWidgetWithRule(Rule &rule, QTreeWidgetItem *parent);
+    void updateTreeWidgetWithRuleId(int &id, QTreeWidgetItem *parent);
+
+    //Settings& _settings;
 
     Ui::Widget *ui;  
 };

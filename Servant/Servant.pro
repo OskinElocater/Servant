@@ -15,13 +15,15 @@ TEMPLATE = app
 SOURCES += main.cpp\
         widget.cpp \
     watcher.cpp \
-    settings.cpp
+    settings.cpp \
+    rule.cpp
 
 HEADERS  += widget.h \
     watcher.h \
     settings.h \
     ../rule.h \
-    rule.h
+    rule.h \
+    settingsloader.h
 
 FORMS    += widget.ui \
     settings.ui
