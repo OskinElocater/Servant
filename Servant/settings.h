@@ -64,7 +64,7 @@ private slots:
     // Item edits
     void on_listWidget_itemDoubleClicked(QListWidgetItem *item);
 
-    void on_listWidget_currentTextChanged(const QString &currentText);
+    void on_listWidget_itemChanged(QListWidgetItem *item);
 
 private:
 

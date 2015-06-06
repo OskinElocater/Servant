@@ -124,8 +124,6 @@ void Widget::on_btn_settings_clicked()
     /*QObject::connect(&settings, &Settings::rulesUpdated,
                      this, &Widget::onRulesUpdated);*/
 
-
-
     settings.setModal(true);
     settings.exec();
 }

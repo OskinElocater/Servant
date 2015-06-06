@@ -20,8 +20,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Settings_t {
-    QByteArrayData data[22];
-    char stringdata[449];
+    QByteArrayData data[21];
+    char stringdata[430];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -50,8 +50,7 @@ QT_MOC_LITERAL(16, 290, 28), // "on_in_filefs_editingFinished"
 QT_MOC_LITERAL(17, 319, 25), // "on_in_cmd_editingFinished"
 QT_MOC_LITERAL(18, 345, 26), // "on_in_args_editingFinished"
 QT_MOC_LITERAL(19, 372, 31), // "on_listWidget_itemDoubleClicked"
-QT_MOC_LITERAL(20, 404, 32), // "on_listWidget_currentTextChanged"
-QT_MOC_LITERAL(21, 437, 11) // "currentText"
+QT_MOC_LITERAL(20, 404, 25) // "on_listWidget_itemChanged"
 
     },
     "Settings\0rulesUpdated\0\0"
@@ -66,8 +65,7 @@ QT_MOC_LITERAL(21, 437, 11) // "currentText"
     "on_in_cmd_editingFinished\0"
     "on_in_args_editingFinished\0"
     "on_listWidget_itemDoubleClicked\0"
-    "on_listWidget_currentTextChanged\0"
-    "currentText"
+    "on_listWidget_itemChanged"
 };
 #undef QT_MOC_LITERAL
 
@@ -120,7 +118,7 @@ static const uint qt_meta_data_Settings[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void, 0x80000000 | 12,   13,
-    QMetaType::Void, QMetaType::QString,   21,
+    QMetaType::Void, 0x80000000 | 12,   13,
 
        0        // eod
 };
@@ -144,7 +142,7 @@ void Settings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         case 11: _t->on_in_cmd_editingFinished(); break;
         case 12: _t->on_in_args_editingFinished(); break;
         case 13: _t->on_listWidget_itemDoubleClicked((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
-        case 14: _t->on_listWidget_currentTextChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 14: _t->on_listWidget_itemChanged((*reinterpret_cast< QListWidgetItem*(*)>(_a[1]))); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {

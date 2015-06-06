@@ -4,7 +4,7 @@
 #include <QProcess>
 
 void Watcher::rulesUpdated(QList<Rule> rules) {
-
+    qDebug("Watcher received ruleUpdated! Updating...");
 }
 
 void Watcher::stopWatching() {

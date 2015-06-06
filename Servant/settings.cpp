@@ -48,19 +48,20 @@ void Settings::init() {
     SettingsLoader::saveRule(r);
 }
 
-void Settings::on_toolButton_clicked()
+void Settings::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    QString dirName;
-    QFileDialog dialog(this);
-    dialog.setFileMode(QFileDialog::Directory);
-    //dialog.setDirectory();                    TODO
+    qDebug("Clicking item...");
 
-    if(dialog.exec()) {
-        dirName = dialog.selectedFiles().first();
-        ui->in_wdir->setText(dirName);
-    }
+    _currentRule = _rules[ui->listWidget->currentRow()];
+    qDebug("Item at row %i with id %i Clicked!",
+           ui->listWidget->currentRow(),
+           _currentRule->id);
 
-    qDebug(dirName.toUtf8().constData());
+    ui->in_wdir->setText(_currentRule->workingDirectory);
+    ui->in_dirfs->setText(_currentRule->directoryFilters.join(", "));
+    ui->in_filefs->setText(_currentRule->fileFilters.join(", "));
+    ui->in_cmd->setText(_currentRule->command);
+    ui->in_args->setText(_currentRule->arguments.join(", "));
 }
 
 void Settings::on_btn_add_rule_clicked()
@@ -89,16 +90,25 @@ void Settings::on_btn_add_rule_clicked()
 void Settings::on_btn_del_rule_clicked()
 {
     qDebug("Deleting rule...");
+
+    if(int cr = ui->listWidget->currentRow() > 0) {
+        _rules.remove(cr);
+        _currentRule = _rules[cr - 1];
+    }
+    else if(cr == 0) {
+        _rules.remove(cr);
+        _currentRule.reset();
+    }
+
     auto item = ui->listWidget->takeItem(ui->listWidget->currentRow());
     qDebug(item->text().toUtf8().constBegin());
+
     QSettings settings;
     settings.beginGroup("Rules");
     settings.remove(item->text());
     settings.endGroup();
 
-    _rules.remove(_currentRule->id);
     delete item;
-    _currentRule = _rules.first();
 }
 
 void Settings::on_btn_apply_clicked()
@@ -116,6 +126,7 @@ void Settings::on_btn_ok_clicked()
         emit rulesUpdated(_rules);
 
     _rules.clear();
+    _currentRule.reset();
     this->close();
 }
 
@@ -129,33 +140,12 @@ void Settings::on_btn_cancel_clicked()
     this->close();
 }
 
-void Settings::on_listWidget_itemClicked(QListWidgetItem *item)
-{
-    qDebug("Clicking item...");
-    int id = -1;
-    Q_FOREACH(auto r, _rules) {
-        if(r->name == item->text())
-           id = r->id;
-    }
-
-    qDebug("Item at row %i with id %i Clicked!", ui->listWidget->currentRow(), id);
-
-    _currentRule = _rules[ui->listWidget->currentRow()];
-    qDebug("Item at row %i with id %i Clicked!",
-           ui->listWidget->currentRow(),
-           _currentRule->id);
-
-    ui->in_wdir->setText(_currentRule->workingDirectory);
-    ui->in_dirfs->setText(_currentRule->directoryFilters.join(", "));
-    ui->in_filefs->setText(_currentRule->fileFilters.join(", "));
-    ui->in_cmd->setText(_currentRule->command);
-    ui->in_args->setText(_currentRule->arguments.join(", "));
-}
-
 void Settings::on_in_wdir_editingFinished()
 {
     qDebug("Editing wDir finished!");
     _currentRule->workingDirectory = ui->in_wdir->text();
+
+    _wereRulesUpdated = true;
 }
 
 void Settings::on_in_dirfs_editingFinished()
@@ -188,16 +178,32 @@ void Settings::on_in_args_editingFinished()
 void Settings::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
     qDebug("Item double-clicked!");
-    item->setFlags(item->flags () | Qt::ItemIsEditable);
-    _isEditing = true;
+
+    item->setFlags(item->flags () | Qt::ItemIsEditable);    
     ui->listWidget->editItem(item);
 }
 
-void Settings::on_listWidget_currentTextChanged(const QString &currentText)
-{
-    qDebug("Current text changed!");
-    if(_isEditing) {
-        _currentRule->name = currentText;
-        _isEditing = false;
-    }
+void Settings::on_listWidget_itemChanged(QListWidgetItem *item) {
+    qDebug("Item text changed!");
+
+    _currentRule->name = item->text();
+    _isEditing = false;
 }
+
+void Settings::on_toolButton_clicked()
+{
+    QString dirName;
+    QFileDialog dialog(this);
+    dialog.setFileMode(QFileDialog::Directory);
+    //dialog.setDirectory();                    TODO
+
+    if(dialog.exec()) {
+        dirName = dialog.selectedFiles().first();
+        ui->in_wdir->setText(dirName);
+    }
+
+    _wereRulesUpdated = true;
+
+    qDebug(dirName.toUtf8().constData());
+}
+
