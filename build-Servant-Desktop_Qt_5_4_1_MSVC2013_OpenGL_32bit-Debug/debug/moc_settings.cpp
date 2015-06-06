@@ -9,7 +9,7 @@
 #include "../../Servant/settings.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
-#include <QtCore/QList>
+#include <QtCore/QVector>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'settings.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -21,7 +21,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Settings_t {
     QByteArrayData data[22];
-    char stringdata[435];
+    char stringdata[449];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,33 +33,34 @@ static const qt_meta_stringdata_Settings_t qt_meta_stringdata_Settings = {
 QT_MOC_LITERAL(0, 0, 8), // "Settings"
 QT_MOC_LITERAL(1, 9, 12), // "rulesUpdated"
 QT_MOC_LITERAL(2, 22, 0), // ""
-QT_MOC_LITERAL(3, 23, 12), // "QList<RuleS>"
-QT_MOC_LITERAL(4, 36, 5), // "rules"
-QT_MOC_LITERAL(5, 42, 21), // "on_toolButton_clicked"
-QT_MOC_LITERAL(6, 64, 23), // "on_btn_add_rule_clicked"
-QT_MOC_LITERAL(7, 88, 23), // "on_btn_del_rule_clicked"
-QT_MOC_LITERAL(8, 112, 20), // "on_btn_apply_clicked"
-QT_MOC_LITERAL(9, 133, 21), // "on_btn_cancel_clicked"
-QT_MOC_LITERAL(10, 155, 17), // "on_btn_ok_clicked"
-QT_MOC_LITERAL(11, 173, 25), // "on_listWidget_itemClicked"
-QT_MOC_LITERAL(12, 199, 16), // "QListWidgetItem*"
-QT_MOC_LITERAL(13, 216, 4), // "item"
-QT_MOC_LITERAL(14, 221, 26), // "on_in_wdir_editingFinished"
-QT_MOC_LITERAL(15, 248, 27), // "on_in_dirfs_editingFinished"
-QT_MOC_LITERAL(16, 276, 28), // "on_in_filefs_editingFinished"
-QT_MOC_LITERAL(17, 305, 25), // "on_in_cmd_editingFinished"
-QT_MOC_LITERAL(18, 331, 26), // "on_in_args_editingFinished"
-QT_MOC_LITERAL(19, 358, 31), // "on_listWidget_itemDoubleClicked"
-QT_MOC_LITERAL(20, 390, 32), // "on_listWidget_currentTextChanged"
-QT_MOC_LITERAL(21, 423, 11) // "currentText"
+QT_MOC_LITERAL(3, 23, 26), // "QVector<shared_ptr<Rule> >"
+QT_MOC_LITERAL(4, 50, 5), // "rules"
+QT_MOC_LITERAL(5, 56, 21), // "on_toolButton_clicked"
+QT_MOC_LITERAL(6, 78, 23), // "on_btn_add_rule_clicked"
+QT_MOC_LITERAL(7, 102, 23), // "on_btn_del_rule_clicked"
+QT_MOC_LITERAL(8, 126, 20), // "on_btn_apply_clicked"
+QT_MOC_LITERAL(9, 147, 21), // "on_btn_cancel_clicked"
+QT_MOC_LITERAL(10, 169, 17), // "on_btn_ok_clicked"
+QT_MOC_LITERAL(11, 187, 25), // "on_listWidget_itemClicked"
+QT_MOC_LITERAL(12, 213, 16), // "QListWidgetItem*"
+QT_MOC_LITERAL(13, 230, 4), // "item"
+QT_MOC_LITERAL(14, 235, 26), // "on_in_wdir_editingFinished"
+QT_MOC_LITERAL(15, 262, 27), // "on_in_dirfs_editingFinished"
+QT_MOC_LITERAL(16, 290, 28), // "on_in_filefs_editingFinished"
+QT_MOC_LITERAL(17, 319, 25), // "on_in_cmd_editingFinished"
+QT_MOC_LITERAL(18, 345, 26), // "on_in_args_editingFinished"
+QT_MOC_LITERAL(19, 372, 31), // "on_listWidget_itemDoubleClicked"
+QT_MOC_LITERAL(20, 404, 32), // "on_listWidget_currentTextChanged"
+QT_MOC_LITERAL(21, 437, 11) // "currentText"
 
     },
-    "Settings\0rulesUpdated\0\0QList<RuleS>\0"
-    "rules\0on_toolButton_clicked\0"
-    "on_btn_add_rule_clicked\0on_btn_del_rule_clicked\0"
-    "on_btn_apply_clicked\0on_btn_cancel_clicked\0"
-    "on_btn_ok_clicked\0on_listWidget_itemClicked\0"
-    "QListWidgetItem*\0item\0on_in_wdir_editingFinished\0"
+    "Settings\0rulesUpdated\0\0"
+    "QVector<shared_ptr<Rule> >\0rules\0"
+    "on_toolButton_clicked\0on_btn_add_rule_clicked\0"
+    "on_btn_del_rule_clicked\0on_btn_apply_clicked\0"
+    "on_btn_cancel_clicked\0on_btn_ok_clicked\0"
+    "on_listWidget_itemClicked\0QListWidgetItem*\0"
+    "item\0on_in_wdir_editingFinished\0"
     "on_in_dirfs_editingFinished\0"
     "on_in_filefs_editingFinished\0"
     "on_in_cmd_editingFinished\0"
@@ -129,7 +130,7 @@ void Settings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
     if (_c == QMetaObject::InvokeMetaMethod) {
         Settings *_t = static_cast<Settings *>(_o);
         switch (_id) {
-        case 0: _t->rulesUpdated((*reinterpret_cast< QList<RuleS>(*)>(_a[1]))); break;
+        case 0: _t->rulesUpdated((*reinterpret_cast< QVector<shared_ptr<Rule> >(*)>(_a[1]))); break;
         case 1: _t->on_toolButton_clicked(); break;
         case 2: _t->on_btn_add_rule_clicked(); break;
         case 3: _t->on_btn_del_rule_clicked(); break;
@@ -150,7 +151,7 @@ void Settings::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, vo
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (Settings::*_t)(QList<RuleS> );
+            typedef void (Settings::*_t)(QVector<shared_ptr<Rule>> );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Settings::rulesUpdated)) {
                 *result = 0;
             }
@@ -195,7 +196,7 @@ int Settings::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Settings::rulesUpdated(QList<RuleS> _t1)
+void Settings::rulesUpdated(QVector<shared_ptr<Rule>> _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

@@ -7,8 +7,9 @@
 struct Rule
 {
 public:
-    Rule(int ruleId = -1,
-         QString &ruleName = QString("new rule"),
+    Rule(int ruleId);
+
+    Rule(QString &ruleName = QString("new rule"),
          QString &wdir = QString(""),
          QStringList &dirFilters = QStringList(""),
          QStringList &fileFilters = QStringList(""),
@@ -18,6 +19,8 @@ public:
     Rule(const Rule& r);
 
     ~Rule();
+
+    Rule& operator=(const Rule& r);
 
     bool operator==(const Rule& r) {
         if(this->id == r.id &&
@@ -40,6 +43,7 @@ public:
     QStringList fileFilters;
     QString command;
     QStringList arguments;
+
 };
 
 #endif // RULE_H

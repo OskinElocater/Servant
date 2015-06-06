@@ -3,18 +3,12 @@
 #include <QDir>
 #include <QProcess>
 
-void Watcher::rulesUpdated(QList<std::shared_ptr<Rule>> rules) {
-    qDebug("Watcher: Rules updated!");
-    Q_FOREACH(auto& rule, rules) {
-        qDebug("Updating rule named %s", rule->name.toUtf8().constData());
-        /*addRuleRecursive(*rule);
-        emit ruleUpdated(*rule);*/
-    }
+void Watcher::rulesUpdated(QList<Rule> rules) {
+
 }
 
 void Watcher::stopWatching() {
-    removeAllPaths();
-    _rules.clear();
+
 }
 
 void Watcher::on_dir_changed(const QString &path) {
@@ -49,44 +43,7 @@ void Watcher::executeCommand(QString &cmd, QStringList &args) {
 }
 
 void Watcher::addRuleRecursive(Rule &rule) {
-    QDir newDir(rule.workingDirectory);
 
-    QStringList dirs = newDir.entryList(QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot);
-
-    this->addPath(rule.workingDirectory);
-    //qDebug(path.toUtf8().constData());
-
-    Q_FOREACH(QString dir, dirs) {
-        QString fullDir = QString("%1/%2").arg(rule.workingDirectory, dir.toUtf8().constData());
-        Rule newRule(rule.id,
-                     rule.name,
-                     rule.workingDirectory,
-                     rule.directoryFilters,
-                     rule.fileFilters,
-                     rule.command,
-                     rule.arguments);
-        addRuleRecursive(newRule);
-    }
-
-    QStringList filesToAdd;
-    Q_FOREACH(QString filter, rule.directoryFilters)
-    if(newDir.dirName() == filter) {
-        Q_FOREACH(QString file,
-                  newDir.entryList(rule.fileFilters,
-                                   QDir::Filter::Files | QDir::Filter::NoDotAndDotDot))
-        {
-            qDebug(newDir.absoluteFilePath(file).toUtf8().constData());
-            filesToAdd.append(newDir.absoluteFilePath(file));
-        }
-    }
-
-    /*QStringList filesWatched = this->files();
-    Q_FOREACH(QString file, filesWatched)
-        qDebug(file.toUtf8().constData());*/
-    if(filesToAdd.empty())
-        qDebug("Skipping %s", rule.workingDirectory.toUtf8().constData());
-    else
-       this->addPaths(filesToAdd);
 }
 
 /*void Watcher::addPathRecursive(QString &path) {

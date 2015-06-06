@@ -12,8 +12,6 @@
 using std::shared_ptr;
 using std::make_shared;
 
-typedef shared_ptr<Rule> RuleS;
-
 namespace Ui {
 class Settings;
 }
@@ -29,11 +27,11 @@ public:
 
     void init();
 
-    QList<RuleS> getRules() { return _rules.values(); }
-    Rule getRuleById(int id) { return *_rules[id]; }
+    QVector<shared_ptr<Rule>> getRules() { return _rules; }
+    shared_ptr<Rule> getRuleById(int id) { return _rules[id]; }
 
 signals:
-    void rulesUpdated(QList<RuleS> rules);
+    void rulesUpdated(QVector<shared_ptr<Rule>> rules);
 
 private slots:
 
@@ -70,9 +68,10 @@ private slots:
 
 private:
 
-    RuleS _currentRule;
-    QMap<int, RuleS> _rules;
+    shared_ptr<Rule> _currentRule;
+    QVector<shared_ptr<Rule>> _rules;
 
+    bool _isEditing{false};
     bool _wereRulesUpdated{false};
 
     Ui::Settings *ui;

@@ -21,7 +21,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Watcher_t {
     QByteArrayData data[12];
-    char stringdata[130];
+    char stringdata[112];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -39,15 +39,15 @@ QT_MOC_LITERAL(5, 32, 15), // "on_file_changed"
 QT_MOC_LITERAL(6, 48, 4), // "path"
 QT_MOC_LITERAL(7, 53, 14), // "on_dir_changed"
 QT_MOC_LITERAL(8, 68, 12), // "rulesUpdated"
-QT_MOC_LITERAL(9, 81, 29), // "QList<std::shared_ptr<Rule> >"
-QT_MOC_LITERAL(10, 111, 5), // "rules"
-QT_MOC_LITERAL(11, 117, 12) // "stopWatching"
+QT_MOC_LITERAL(9, 81, 11), // "QList<Rule>"
+QT_MOC_LITERAL(10, 93, 5), // "rules"
+QT_MOC_LITERAL(11, 99, 12) // "stopWatching"
 
     },
     "Watcher\0ruleUpdated\0\0Rule&\0rule\0"
     "on_file_changed\0path\0on_dir_changed\0"
-    "rulesUpdated\0QList<std::shared_ptr<Rule> >\0"
-    "rules\0stopWatching"
+    "rulesUpdated\0QList<Rule>\0rules\0"
+    "stopWatching"
 };
 #undef QT_MOC_LITERAL
 
@@ -93,7 +93,7 @@ void Watcher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         case 0: _t->ruleUpdated((*reinterpret_cast< Rule(*)>(_a[1]))); break;
         case 1: _t->on_file_changed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 2: _t->on_dir_changed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->rulesUpdated((*reinterpret_cast< QList<std::shared_ptr<Rule> >(*)>(_a[1]))); break;
+        case 3: _t->rulesUpdated((*reinterpret_cast< QList<Rule>(*)>(_a[1]))); break;
         case 4: _t->stopWatching(); break;
         default: ;
         }

@@ -28,7 +28,7 @@ public slots:
     void on_file_changed(const QString &path);
     void on_dir_changed(const QString &path);
 
-    void rulesUpdated(QList<std::shared_ptr<Rule> > rules);
+    void rulesUpdated(QList<Rule> rules);
     void stopWatching();
 
 signals:
@@ -43,7 +43,7 @@ private:
 
     void executeCommand(QString &cmd, QStringList &args);
 
-    QMap<QString, std::shared_ptr<Rule>> _rules;
+    std::shared_ptr<QMap<QString, Rule>> _rules;
 
     QString wDir;
     QStringList wFileFilters;

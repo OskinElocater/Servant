@@ -21,7 +21,7 @@
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Widget_t {
     QByteArrayData data[16];
-    char stringdata[209];
+    char stringdata[191];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,23 +33,23 @@ static const qt_meta_stringdata_Widget_t qt_meta_stringdata_Widget = {
 QT_MOC_LITERAL(0, 0, 6), // "Widget"
 QT_MOC_LITERAL(1, 7, 12), // "rulesUpdated"
 QT_MOC_LITERAL(2, 20, 0), // ""
-QT_MOC_LITERAL(3, 21, 29), // "QList<std::shared_ptr<Rule> >"
-QT_MOC_LITERAL(4, 51, 5), // "rules"
-QT_MOC_LITERAL(5, 57, 12), // "stopWatching"
-QT_MOC_LITERAL(6, 70, 11), // "fileChanged"
-QT_MOC_LITERAL(7, 82, 4), // "path"
-QT_MOC_LITERAL(8, 87, 16), // "directoryChanged"
-QT_MOC_LITERAL(9, 104, 13), // "onRuleUpdated"
-QT_MOC_LITERAL(10, 118, 5), // "Rule&"
-QT_MOC_LITERAL(11, 124, 4), // "rule"
-QT_MOC_LITERAL(12, 129, 14), // "onRulesUpdated"
-QT_MOC_LITERAL(13, 144, 23), // "on_btn_settings_clicked"
-QT_MOC_LITERAL(14, 168, 20), // "on_btn_start_clicked"
-QT_MOC_LITERAL(15, 189, 19) // "on_btn_stop_clicked"
+QT_MOC_LITERAL(3, 21, 11), // "QList<Rule>"
+QT_MOC_LITERAL(4, 33, 5), // "rules"
+QT_MOC_LITERAL(5, 39, 12), // "stopWatching"
+QT_MOC_LITERAL(6, 52, 11), // "fileChanged"
+QT_MOC_LITERAL(7, 64, 4), // "path"
+QT_MOC_LITERAL(8, 69, 16), // "directoryChanged"
+QT_MOC_LITERAL(9, 86, 13), // "onRuleUpdated"
+QT_MOC_LITERAL(10, 100, 5), // "Rule&"
+QT_MOC_LITERAL(11, 106, 4), // "rule"
+QT_MOC_LITERAL(12, 111, 14), // "onRulesUpdated"
+QT_MOC_LITERAL(13, 126, 23), // "on_btn_settings_clicked"
+QT_MOC_LITERAL(14, 150, 20), // "on_btn_start_clicked"
+QT_MOC_LITERAL(15, 171, 19) // "on_btn_stop_clicked"
 
     },
-    "Widget\0rulesUpdated\0\0QList<std::shared_ptr<Rule> >\0"
-    "rules\0stopWatching\0fileChanged\0path\0"
+    "Widget\0rulesUpdated\0\0QList<Rule>\0rules\0"
+    "stopWatching\0fileChanged\0path\0"
     "directoryChanged\0onRuleUpdated\0Rule&\0"
     "rule\0onRulesUpdated\0on_btn_settings_clicked\0"
     "on_btn_start_clicked\0on_btn_stop_clicked"
@@ -103,12 +103,12 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     if (_c == QMetaObject::InvokeMetaMethod) {
         Widget *_t = static_cast<Widget *>(_o);
         switch (_id) {
-        case 0: _t->rulesUpdated((*reinterpret_cast< QList<std::shared_ptr<Rule> >(*)>(_a[1]))); break;
+        case 0: _t->rulesUpdated((*reinterpret_cast< QList<Rule>(*)>(_a[1]))); break;
         case 1: _t->stopWatching(); break;
         case 2: _t->fileChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 3: _t->directoryChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         case 4: _t->onRuleUpdated((*reinterpret_cast< Rule(*)>(_a[1]))); break;
-        case 5: _t->onRulesUpdated((*reinterpret_cast< QList<std::shared_ptr<Rule> >(*)>(_a[1]))); break;
+        case 5: _t->onRulesUpdated((*reinterpret_cast< QList<Rule>(*)>(_a[1]))); break;
         case 6: _t->on_btn_settings_clicked(); break;
         case 7: _t->on_btn_start_clicked(); break;
         case 8: _t->on_btn_stop_clicked(); break;
@@ -118,7 +118,7 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (Widget::*_t)(QList<std::shared_ptr<Rule>> );
+            typedef void (Widget::*_t)(QList<Rule> );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Widget::rulesUpdated)) {
                 *result = 0;
             }
@@ -169,7 +169,7 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Widget::rulesUpdated(QList<std::shared_ptr<Rule>> _t1)
+void Widget::rulesUpdated(QList<Rule> _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

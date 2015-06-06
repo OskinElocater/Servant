@@ -23,7 +23,7 @@ public slots:
     void fileChanged(const QString &path);
     void directoryChanged(const QString &path);
     void onRuleUpdated(Rule &rule);
-    void onRulesUpdated(QList<std::shared_ptr<Rule> > rules);
+    void onRulesUpdated(QList<Rule> rules);
 
 private slots:
     void on_btn_settings_clicked();
@@ -33,7 +33,7 @@ private slots:
     void on_btn_stop_clicked();
 
 signals:
-    void rulesUpdated(QList<std::shared_ptr<Rule>> rules);
+    void rulesUpdated(QList<Rule> rules);
     void stopWatching();
 
 private:

@@ -40,7 +40,7 @@ void Widget::onRuleUpdated(Rule &rule) {
     updateTreeWidgetWithRule(rule, Q_NULLPTR);
 }
 
-void Widget::onRulesUpdated(QList<shared_ptr<Rule>> rules) {
+void Widget::onRulesUpdated(QList<Rule> rules) {
     qDebug("Widget: Rules Updated!");
     emit rulesUpdated(rules);
 }
@@ -54,7 +54,7 @@ void Widget::updateTreeWidgetWithRule(Rule &rule, QTreeWidgetItem *parent) {
 
     Q_FOREACH(QString dir, dirs) {
         //qDebug(dir.toUtf8().constData());
-        Rule newRule(rule.id, rule.name, dir, rule.directoryFilters, rule.fileFilters,
+        Rule newRule(rule.name, dir, rule.directoryFilters, rule.fileFilters,
                      rule.command, rule.arguments);
         updateTreeWidgetWithRule(newRule, topItem);
     }
@@ -80,8 +80,8 @@ void Widget::updateTreeWidgetWithRule(Rule &rule, QTreeWidgetItem *parent) {
 }
 
 void Widget::updateTreeWidgetWithRuleId(int &id, QTreeWidgetItem *parent) {
-    auto rules = SettingsLoader::loadRules();
-    Rule rule = *rules[id];
+    /*auto rules = SettingsLoader::loadRules();
+    Rule rule = rules->value(id);
     QDir newDir(rule.workingDirectory);
     QTreeWidgetItem *topItem = new QTreeWidgetItem();
     topItem->setText(0, newDir.dirName());
@@ -90,7 +90,7 @@ void Widget::updateTreeWidgetWithRuleId(int &id, QTreeWidgetItem *parent) {
 
     Q_FOREACH(QString dir, dirs) {
         //qDebug(dir.toUtf8().constData());
-        Rule newRule(rule.id, rule.name, dir, rule.directoryFilters, rule.fileFilters,
+        Rule newRule(rule.name, dir, rule.directoryFilters, rule.fileFilters,
                      rule.command, rule.arguments);
         updateTreeWidgetWithRule(newRule, topItem);
     }
@@ -112,22 +112,19 @@ void Widget::updateTreeWidgetWithRuleId(int &id, QTreeWidgetItem *parent) {
     if(parent == Q_NULLPTR)
         ui->treeWidget->addTopLevelItem(topItem);
     else if(topItem->childCount() != 0)
-        parent->addChild(topItem);
+        parent->addChild(topItem);*/
 }
 
 void Widget::on_btn_settings_clicked()
 {
-    Settings settings;
+    QSettings s;
+    //s.clear();
+
+    Settings settings = Settings();
     /*QObject::connect(&settings, &Settings::rulesUpdated,
                      this, &Widget::onRulesUpdated);*/
 
-    QSettings s;
-    s.clear();
-    if(s.value("IsFirstLaunch", true).toBool()) {
-        qDebug("Initializing settings");
-        settings.init();
-        s.setValue("IsFirstLaunch", false);
-    }
+
 
     settings.setModal(true);
     settings.exec();
@@ -135,14 +132,10 @@ void Widget::on_btn_settings_clicked()
 
 void Widget::on_btn_start_clicked()
 {
-    Settings settings;
-    QObject::connect(&settings, &Settings::rulesUpdated,
-                     this, &Widget::onRulesUpdated);
 
-    emit rulesUpdated(SettingsLoader::loadRules().values());
 }
 
 void Widget::on_btn_stop_clicked()
 {
-    emit stopWatching();
+
 }

@@ -1,15 +1,26 @@
 #include "rule.h"
 
-int Rule::rules_count = 0;
+int Rule::rules_count{0};
 
-Rule::Rule(int ruleId,
-           QString &ruleName,
+Rule::Rule(int ruleId):
+    id(ruleId),
+    name(QString("")),
+    workingDirectory(QString("")),
+    directoryFilters(QStringList("")),
+    fileFilters(QStringList("")),
+    command(QString("")),
+    arguments(QStringList(""))
+{
+    qDebug("Creating empty rule with id %i", id);
+}
+
+Rule::Rule(QString &ruleName,
            QString &wdir,
            QStringList &dirFilters,
            QStringList &fileFilters,
            QString &cmd,
            QStringList &args):
-    id(ruleId),
+    id(rules_count++),
     name(ruleName),
     workingDirectory(wdir),
     directoryFilters(dirFilters),
@@ -17,13 +28,10 @@ Rule::Rule(int ruleId,
     command(cmd),
     arguments(args)
 {
-    if(id == -1)
-        id = Rule::rules_count++;
-    else
-        Rule::rules_count++;
+    qDebug("Creating new rule with id %i", id);
 }
 
-Rule::Rule(const Rule &r):
+Rule::Rule(const Rule & r):
     id(r.id),
     name(r.name),
     workingDirectory(r.workingDirectory),
@@ -32,10 +40,24 @@ Rule::Rule(const Rule &r):
     command(r.command),
     arguments(r.arguments)
 {
-
+    qDebug("Calling copy constructor for id %i", id);
 }
 
-
-Rule::~Rule() {
+Rule& Rule::operator=(const Rule& r) {
+    qDebug("Copying rule with id %i", id);
+    Rule newRule(QString(r.name),
+                 QString(r.workingDirectory),
+                 QStringList(r.directoryFilters),
+                 QStringList(r.fileFilters),
+                 QString(r.command),
+                 QStringList(r.arguments));
+    newRule.id = r.id;
     rules_count--;
+
+    return newRule;
+}
+
+Rule::~Rule() {    
+    rules_count--;
+    qDebug("Destroying rule, new count is %i", rules_count);
 }
