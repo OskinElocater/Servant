@@ -21,21 +21,15 @@ public:
         QSettings settings;
         settings.beginGroup("Rules");
         Q_FOREACH(QString s, settings.childGroups()) {
-            settings.beginGroup(s);            
-            qDebug("%s", settings.value("name").toString().toUtf8().constData());
-            qDebug("%s", settings.value("wDir").toString().toUtf8().constData());
-            qDebug("%s", settings.value("dirFilters").toStringList().join(", ").toUtf8().constData());
-            qDebug("%s", settings.value("fileFilters").toStringList().join(", ").toUtf8().constData());
-            qDebug("%s", settings.value("command").toString().toUtf8().constData());
-            qDebug("%s", settings.value("args").toStringList().join(", ").toUtf8().constData());
+            settings.beginGroup(s);
             shared_ptr<Rule> r = make_shared<Rule>(settings.value("name").toString(),
-                              settings.value("wDir").toString(),
-                              settings.value("dirFilters").toStringList(),
-                              settings.value("fileFilters").toStringList(),
-                              settings.value("command").toString(),
-                              settings.value("args").toStringList());
+                                                   settings.value("wDir").toString(),
+                                                   settings.value("dirFilters").toStringList(),
+                                                   settings.value("fileFilters").toStringList(),
+                                                   settings.value("command").toString(),
+                                                   settings.value("args").toStringList());
 
-            r->id = settings.value("id", -1).toInt(); // This may be bad!
+            //r->id = settings.value("id", -1).toInt(); // This may be bad!
             ret.push_back(r);
             settings.endGroup();
         }

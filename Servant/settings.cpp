@@ -26,7 +26,7 @@ Settings::Settings(QWidget *parent) :
     _rules = SettingsLoader::loadRules();    
 
     Q_FOREACH(auto& r, _rules) {
-        qDebug("Index of item %i", r->id);
+        //qDebug("Index of item %i", r->id);
         QListWidgetItem *newItem = new QListWidgetItem(r->name);
         ui->listWidget->addItem(newItem);
     }
@@ -50,26 +50,24 @@ void Settings::init() {
 
 void Settings::on_listWidget_itemClicked(QListWidgetItem *item)
 {
-    qDebug("Clicking item...");
+    //qDebug("Clicking item...");
 
     _currentRule = _rules[ui->listWidget->currentRow()];
-    qDebug("Item at row %i with id %i Clicked!",
-           ui->listWidget->currentRow(),
-           _currentRule->id);
+    //qDebug("Item at row %i with id %i Clicked!", ui->listWidget->currentRow(), _currentRule->id);
 
     ui->in_wdir->setText(_currentRule->workingDirectory);
     ui->in_dirfs->setText(_currentRule->directoryFilters.join(", "));
     ui->in_filefs->setText(_currentRule->fileFilters.join(", "));
     ui->in_cmd->setText(_currentRule->command);
-    ui->in_args->setText(_currentRule->arguments.join(", "));
+    ui->in_args->setText(_currentRule->arguments.join(" "));
 }
 
 void Settings::on_btn_add_rule_clicked()
 {
-    qDebug("Adding new rule...");
+    //qDebug("Adding new rule...");
     shared_ptr<Rule> newRule = make_shared<Rule>(QString("Rule %1").arg(Rule::rules_count),
                                                  QString(""),
-                                                 QStringList("*"),
+                                                 QStringList(""),
                                                  QStringList("*.*"),
                                                  QString(""),
                                                  QStringList(""));
@@ -89,7 +87,7 @@ void Settings::on_btn_add_rule_clicked()
 
 void Settings::on_btn_del_rule_clicked()
 {
-    qDebug("Deleting rule...");
+    //qDebug("Deleting rule...");
 
     if(int cr = ui->listWidget->currentRow() > 0) {
         _rules.remove(cr);
@@ -101,7 +99,7 @@ void Settings::on_btn_del_rule_clicked()
     }
 
     auto item = ui->listWidget->takeItem(ui->listWidget->currentRow());
-    qDebug(item->text().toUtf8().constBegin());
+    //qDebug(item->text().toUtf8().constBegin());
 
     QSettings settings;
     settings.beginGroup("Rules");
@@ -109,6 +107,8 @@ void Settings::on_btn_del_rule_clicked()
     settings.endGroup();
 
     delete item;
+
+    _wereRulesUpdated = true;
 }
 
 void Settings::on_btn_apply_clicked()
@@ -122,8 +122,8 @@ void Settings::on_btn_ok_clicked()
     qDebug("Applying and closing dialog...");
     SettingsLoader::saveRules(_rules);
 
-    if(_wereRulesUpdated)
-        emit rulesUpdated(_rules);
+    //if(_wereRulesUpdated)
+    emit rulesUpdated(_rules);
 
     _rules.clear();
     _currentRule.reset();
@@ -142,7 +142,7 @@ void Settings::on_btn_cancel_clicked()
 
 void Settings::on_in_wdir_editingFinished()
 {
-    qDebug("Editing wDir finished!");
+    //qDebug("Editing wDir finished!");
     _currentRule->workingDirectory = ui->in_wdir->text();
 
     _wereRulesUpdated = true;
@@ -150,41 +150,43 @@ void Settings::on_in_wdir_editingFinished()
 
 void Settings::on_in_dirfs_editingFinished()
 {
-    qDebug("Editing dirFs finished!");
+    //qDebug("Editing dirFs finished!");
     _currentRule->directoryFilters = ui->in_dirfs->text().split(", ",
                                                                 QString::SkipEmptyParts);
 }
 
 void Settings::on_in_filefs_editingFinished()
 {
-    qDebug("Editing fileFs finished!");
+    //qDebug("Editing fileFs finished!");
     _currentRule->fileFilters = ui->in_filefs->text().split(", ",
                                                             QString::SkipEmptyParts);
 }
 
 void Settings::on_in_cmd_editingFinished()
 {
-    qDebug("Editing cmd finished!");
+    //qDebug("Editing cmd finished!");
     _currentRule->command = ui->in_cmd->text();
 }
 
 void Settings::on_in_args_editingFinished()
 {
-    qDebug("Editing args finished!");
-    _currentRule->arguments = ui->in_args->text().split(", ",
+    //qDebug("Editing args finished!");
+    _currentRule->arguments = ui->in_args->text().split(QRegExp("\\s"),
                                                         QString::SkipEmptyParts);
+    Q_FOREACH(auto a, _currentRule->arguments)
+        qDebug("%s", a.toUtf8().constData());
 }
 
 void Settings::on_listWidget_itemDoubleClicked(QListWidgetItem *item)
 {
-    qDebug("Item double-clicked!");
+    //qDebug("Item double-clicked!");
 
     item->setFlags(item->flags () | Qt::ItemIsEditable);    
     ui->listWidget->editItem(item);
 }
 
 void Settings::on_listWidget_itemChanged(QListWidgetItem *item) {
-    qDebug("Item text changed!");
+    //qDebug("Item text changed!");
 
     _currentRule->name = item->text();
     _isEditing = false;

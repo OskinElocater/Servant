@@ -16,14 +16,16 @@ SOURCES += main.cpp\
         widget.cpp \
     watcher.cpp \
     settings.cpp \
-    rule.cpp
+    rule.cpp \
+    watchermanager.cpp
 
 HEADERS  += widget.h \
     watcher.h \
     settings.h \
     ../rule.h \
     rule.h \
-    settingsloader.h
+    settingsloader.h \
+    watchermanager.h
 
 FORMS    += widget.ui \
     settings.ui

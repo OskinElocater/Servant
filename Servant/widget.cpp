@@ -7,7 +7,6 @@
 
 #include <QProcess>
 #include <QSettings>
-#include <QDir>
 
 using namespace std;
 
@@ -15,7 +14,7 @@ Widget::Widget(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::Widget)
 {
-    ui->setupUi(this);    
+    ui->setupUi(this);
 }
 
 Widget::~Widget()
@@ -23,7 +22,7 @@ Widget::~Widget()
     delete ui;
 }
 
-void Widget::fileChanged(const QString &path)
+void Widget::fileChanged(QString &ruleName, const QString &path)
 {
     //qDebug("File %s changed!", path.toUtf8().constData());
     ui->output->append(path + QString(" is changed."));
@@ -35,18 +34,29 @@ void Widget::directoryChanged(const QString &path)
     ui->output->append(path + QString(" is changed."));
 }
 
-void Widget::onRuleUpdated(Rule &rule) {
-    ui->treeWidget->clear();
-    updateTreeWidgetWithRule(rule, Q_NULLPTR);
-}
+void Widget::onRulesUpdated(QVector<shared_ptr<Rule>> rules) {
+    qDebug("Widget: Rules updated! Updating tree view...");
+    ui->output->append("Rules changed! Updating...");
 
-void Widget::onRulesUpdated(QList<Rule> rules) {
-    qDebug("Widget: Rules Updated!");
     emit rulesUpdated(rules);
+
+    ui->treeWidget->clear();
+    Q_FOREACH(auto& r, rules) {        
+        _currentRule = r;
+
+        QTreeWidgetItem *ruleNameItem = new QTreeWidgetItem();
+        ruleNameItem->setText(0, r->name);
+        updateTreeWidgetWithPath(_currentRule->workingDirectory, ruleNameItem);
+        ui->treeWidget->addTopLevelItem(ruleNameItem);
+
+        ui->output->append(QString("Updated rule %1").arg(r->name));
+    }
+
+    _currentRule.reset();
 }
 
-void Widget::updateTreeWidgetWithRule(Rule &rule, QTreeWidgetItem *parent) {
-    QDir newDir(rule.workingDirectory);
+void Widget::updateTreeWidgetWithPath(QString &path, QTreeWidgetItem *parent) {
+    QDir newDir(path);
     QTreeWidgetItem *topItem = new QTreeWidgetItem();
     topItem->setText(0, newDir.dirName());
 
@@ -54,24 +64,17 @@ void Widget::updateTreeWidgetWithRule(Rule &rule, QTreeWidgetItem *parent) {
 
     Q_FOREACH(QString dir, dirs) {
         //qDebug(dir.toUtf8().constData());
-        Rule newRule(rule.name, dir, rule.directoryFilters, rule.fileFilters,
-                     rule.command, rule.arguments);
-        updateTreeWidgetWithRule(newRule, topItem);
+        QString fullDir = QString("%1/%2").arg(path, dir.toUtf8().constData());
+        updateTreeWidgetWithPath(fullDir, topItem);
     }
 
-    QStringList filters = rule.directoryFilters;
-    Q_FOREACH(QString filter, filters)
-        if(newDir.dirName() == filter) {
-            QStringList fileFilters = rule.fileFilters;
-            Q_FOREACH(QString file,
-                      newDir.entryList(fileFilters,
-                                       QDir::Filter::Files | QDir::Filter::NoDotAndDotDot))
-            {
-                QTreeWidgetItem *fileItem = new QTreeWidgetItem();
-                fileItem->setText(0, file);
-                topItem->addChild(fileItem);
+    if(_currentRule->directoryFilters.empty())
+        addItemInDir(newDir, topItem);
+    else
+        Q_FOREACH(QString filter, _currentRule->directoryFilters)
+            if(newDir.dirName() == filter) {
+                addItemInDir(newDir, topItem);
             }
-        }
 
     if(parent == Q_NULLPTR)
         ui->treeWidget->addTopLevelItem(topItem);
@@ -79,40 +82,15 @@ void Widget::updateTreeWidgetWithRule(Rule &rule, QTreeWidgetItem *parent) {
         parent->addChild(topItem);
 }
 
-void Widget::updateTreeWidgetWithRuleId(int &id, QTreeWidgetItem *parent) {
-    /*auto rules = SettingsLoader::loadRules();
-    Rule rule = rules->value(id);
-    QDir newDir(rule.workingDirectory);
-    QTreeWidgetItem *topItem = new QTreeWidgetItem();
-    topItem->setText(0, newDir.dirName());
-
-    QStringList dirs = newDir.entryList(QDir::Filter::Dirs | QDir::Filter::NoDotAndDotDot);
-
-    Q_FOREACH(QString dir, dirs) {
-        //qDebug(dir.toUtf8().constData());
-        Rule newRule(rule.name, dir, rule.directoryFilters, rule.fileFilters,
-                     rule.command, rule.arguments);
-        updateTreeWidgetWithRule(newRule, topItem);
+void Widget::addItemInDir(QDir &dir, QTreeWidgetItem *parent) {
+    Q_FOREACH(QString file,
+              dir.entryList(_currentRule->fileFilters,                            
+                            QDir::Filter::Files | QDir::Filter::NoDotAndDotDot))
+    {
+        QTreeWidgetItem *fileItem = new QTreeWidgetItem();
+        fileItem->setText(0, file);
+        parent->addChild(fileItem);
     }
-
-    QStringList filters = rule.directoryFilters;
-    Q_FOREACH(QString filter, filters)
-        if(newDir.dirName() == filter) {
-            QStringList fileFilters = rule.fileFilters;
-            Q_FOREACH(QString file,
-                      newDir.entryList(fileFilters,
-                                       QDir::Filter::Files | QDir::Filter::NoDotAndDotDot))
-            {
-                QTreeWidgetItem *fileItem = new QTreeWidgetItem();
-                fileItem->setText(0, file);
-                topItem->addChild(fileItem);
-            }
-        }
-
-    if(parent == Q_NULLPTR)
-        ui->treeWidget->addTopLevelItem(topItem);
-    else if(topItem->childCount() != 0)
-        parent->addChild(topItem);*/
 }
 
 void Widget::on_btn_settings_clicked()
@@ -121,8 +99,8 @@ void Widget::on_btn_settings_clicked()
     //s.clear();
 
     Settings settings = Settings();
-    /*QObject::connect(&settings, &Settings::rulesUpdated,
-                     this, &Widget::onRulesUpdated);*/
+    QObject::connect(&settings, &Settings::rulesUpdated,
+                     this, &Widget::onRulesUpdated);
 
     settings.setModal(true);
     settings.exec();

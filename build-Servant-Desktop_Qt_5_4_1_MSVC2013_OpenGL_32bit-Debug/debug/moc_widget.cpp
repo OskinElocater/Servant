@@ -9,7 +9,7 @@
 #include "../../Servant/widget.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
-#include <QtCore/QList>
+#include <QtCore/QVector>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'widget.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -20,8 +20,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Widget_t {
-    QByteArrayData data[16];
-    char stringdata[191];
+    QByteArrayData data[15];
+    char stringdata[199];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -33,25 +33,24 @@ static const qt_meta_stringdata_Widget_t qt_meta_stringdata_Widget = {
 QT_MOC_LITERAL(0, 0, 6), // "Widget"
 QT_MOC_LITERAL(1, 7, 12), // "rulesUpdated"
 QT_MOC_LITERAL(2, 20, 0), // ""
-QT_MOC_LITERAL(3, 21, 11), // "QList<Rule>"
-QT_MOC_LITERAL(4, 33, 5), // "rules"
-QT_MOC_LITERAL(5, 39, 12), // "stopWatching"
-QT_MOC_LITERAL(6, 52, 11), // "fileChanged"
-QT_MOC_LITERAL(7, 64, 4), // "path"
-QT_MOC_LITERAL(8, 69, 16), // "directoryChanged"
-QT_MOC_LITERAL(9, 86, 13), // "onRuleUpdated"
-QT_MOC_LITERAL(10, 100, 5), // "Rule&"
-QT_MOC_LITERAL(11, 106, 4), // "rule"
-QT_MOC_LITERAL(12, 111, 14), // "onRulesUpdated"
-QT_MOC_LITERAL(13, 126, 23), // "on_btn_settings_clicked"
-QT_MOC_LITERAL(14, 150, 20), // "on_btn_start_clicked"
-QT_MOC_LITERAL(15, 171, 19) // "on_btn_stop_clicked"
+QT_MOC_LITERAL(3, 21, 26), // "QVector<shared_ptr<Rule> >"
+QT_MOC_LITERAL(4, 48, 5), // "rules"
+QT_MOC_LITERAL(5, 54, 12), // "stopWatching"
+QT_MOC_LITERAL(6, 67, 11), // "fileChanged"
+QT_MOC_LITERAL(7, 79, 8), // "QString&"
+QT_MOC_LITERAL(8, 88, 8), // "ruleName"
+QT_MOC_LITERAL(9, 97, 4), // "path"
+QT_MOC_LITERAL(10, 102, 16), // "directoryChanged"
+QT_MOC_LITERAL(11, 119, 14), // "onRulesUpdated"
+QT_MOC_LITERAL(12, 134, 23), // "on_btn_settings_clicked"
+QT_MOC_LITERAL(13, 158, 20), // "on_btn_start_clicked"
+QT_MOC_LITERAL(14, 179, 19) // "on_btn_stop_clicked"
 
     },
-    "Widget\0rulesUpdated\0\0QList<Rule>\0rules\0"
-    "stopWatching\0fileChanged\0path\0"
-    "directoryChanged\0onRuleUpdated\0Rule&\0"
-    "rule\0onRulesUpdated\0on_btn_settings_clicked\0"
+    "Widget\0rulesUpdated\0\0QVector<shared_ptr<Rule> >\0"
+    "rules\0stopWatching\0fileChanged\0QString&\0"
+    "ruleName\0path\0directoryChanged\0"
+    "onRulesUpdated\0on_btn_settings_clicked\0"
     "on_btn_start_clicked\0on_btn_stop_clicked"
 };
 #undef QT_MOC_LITERAL
@@ -62,7 +61,7 @@ static const uint qt_meta_data_Widget[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       9,   14, // methods
+       8,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -70,26 +69,24 @@ static const uint qt_meta_data_Widget[] = {
        2,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    1,   59,    2, 0x06 /* Public */,
-       5,    0,   62,    2, 0x06 /* Public */,
+       1,    1,   54,    2, 0x06 /* Public */,
+       5,    0,   57,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       6,    1,   63,    2, 0x0a /* Public */,
-       8,    1,   66,    2, 0x0a /* Public */,
-       9,    1,   69,    2, 0x0a /* Public */,
-      12,    1,   72,    2, 0x0a /* Public */,
-      13,    0,   75,    2, 0x08 /* Private */,
-      14,    0,   76,    2, 0x08 /* Private */,
-      15,    0,   77,    2, 0x08 /* Private */,
+       6,    2,   58,    2, 0x0a /* Public */,
+      10,    1,   63,    2, 0x0a /* Public */,
+      11,    1,   66,    2, 0x0a /* Public */,
+      12,    0,   69,    2, 0x08 /* Private */,
+      13,    0,   70,    2, 0x08 /* Private */,
+      14,    0,   71,    2, 0x08 /* Private */,
 
  // signals: parameters
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    7,
-    QMetaType::Void, QMetaType::QString,    7,
-    QMetaType::Void, 0x80000000 | 10,   11,
+    QMetaType::Void, 0x80000000 | 7, QMetaType::QString,    8,    9,
+    QMetaType::Void, QMetaType::QString,    9,
     QMetaType::Void, 0x80000000 | 3,    4,
     QMetaType::Void,
     QMetaType::Void,
@@ -103,22 +100,21 @@ void Widget::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
     if (_c == QMetaObject::InvokeMetaMethod) {
         Widget *_t = static_cast<Widget *>(_o);
         switch (_id) {
-        case 0: _t->rulesUpdated((*reinterpret_cast< QList<Rule>(*)>(_a[1]))); break;
+        case 0: _t->rulesUpdated((*reinterpret_cast< QVector<shared_ptr<Rule> >(*)>(_a[1]))); break;
         case 1: _t->stopWatching(); break;
-        case 2: _t->fileChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 2: _t->fileChanged((*reinterpret_cast< QString(*)>(_a[1])),(*reinterpret_cast< const QString(*)>(_a[2]))); break;
         case 3: _t->directoryChanged((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 4: _t->onRuleUpdated((*reinterpret_cast< Rule(*)>(_a[1]))); break;
-        case 5: _t->onRulesUpdated((*reinterpret_cast< QList<Rule>(*)>(_a[1]))); break;
-        case 6: _t->on_btn_settings_clicked(); break;
-        case 7: _t->on_btn_start_clicked(); break;
-        case 8: _t->on_btn_stop_clicked(); break;
+        case 4: _t->onRulesUpdated((*reinterpret_cast< QVector<shared_ptr<Rule> >(*)>(_a[1]))); break;
+        case 5: _t->on_btn_settings_clicked(); break;
+        case 6: _t->on_btn_start_clicked(); break;
+        case 7: _t->on_btn_stop_clicked(); break;
         default: ;
         }
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         void **func = reinterpret_cast<void **>(_a[1]);
         {
-            typedef void (Widget::*_t)(QList<Rule> );
+            typedef void (Widget::*_t)(QVector<shared_ptr<Rule>> );
             if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Widget::rulesUpdated)) {
                 *result = 0;
             }
@@ -157,19 +153,19 @@ int Widget::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 9)
+        if (_id < 8)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 9;
+        _id -= 8;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 9)
+        if (_id < 8)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 9;
+        _id -= 8;
     }
     return _id;
 }
 
 // SIGNAL 0
-void Widget::rulesUpdated(QList<Rule> _t1)
+void Widget::rulesUpdated(QVector<shared_ptr<Rule>> _t1)
 {
     void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
     QMetaObject::activate(this, &staticMetaObject, 0, _a);

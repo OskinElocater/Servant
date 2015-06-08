@@ -9,7 +9,6 @@
 #include "../../Servant/watcher.h"
 #include <QtCore/qbytearray.h>
 #include <QtCore/qmetatype.h>
-#include <QtCore/QList>
 #if !defined(Q_MOC_OUTPUT_REVISION)
 #error "The header file 'watcher.h' doesn't include <QObject>."
 #elif Q_MOC_OUTPUT_REVISION != 67
@@ -20,8 +19,8 @@
 
 QT_BEGIN_MOC_NAMESPACE
 struct qt_meta_stringdata_Watcher_t {
-    QByteArrayData data[12];
-    char stringdata[112];
+    QByteArrayData data[5];
+    char stringdata[45];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -31,23 +30,14 @@ struct qt_meta_stringdata_Watcher_t {
 static const qt_meta_stringdata_Watcher_t qt_meta_stringdata_Watcher = {
     {
 QT_MOC_LITERAL(0, 0, 7), // "Watcher"
-QT_MOC_LITERAL(1, 8, 11), // "ruleUpdated"
-QT_MOC_LITERAL(2, 20, 0), // ""
-QT_MOC_LITERAL(3, 21, 5), // "Rule&"
-QT_MOC_LITERAL(4, 27, 4), // "rule"
-QT_MOC_LITERAL(5, 32, 15), // "on_file_changed"
-QT_MOC_LITERAL(6, 48, 4), // "path"
-QT_MOC_LITERAL(7, 53, 14), // "on_dir_changed"
-QT_MOC_LITERAL(8, 68, 12), // "rulesUpdated"
-QT_MOC_LITERAL(9, 81, 11), // "QList<Rule>"
-QT_MOC_LITERAL(10, 93, 5), // "rules"
-QT_MOC_LITERAL(11, 99, 12) // "stopWatching"
+QT_MOC_LITERAL(1, 8, 15), // "on_file_changed"
+QT_MOC_LITERAL(2, 24, 0), // ""
+QT_MOC_LITERAL(3, 25, 4), // "path"
+QT_MOC_LITERAL(4, 30, 14) // "on_dir_changed"
 
     },
-    "Watcher\0ruleUpdated\0\0Rule&\0rule\0"
-    "on_file_changed\0path\0on_dir_changed\0"
-    "rulesUpdated\0QList<Rule>\0rules\0"
-    "stopWatching"
+    "Watcher\0on_file_changed\0\0path\0"
+    "on_dir_changed"
 };
 #undef QT_MOC_LITERAL
 
@@ -57,30 +47,20 @@ static const uint qt_meta_data_Watcher[] = {
        7,       // revision
        0,       // classname
        0,    0, // classinfo
-       5,   14, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       1,       // signalCount
-
- // signals: name, argc, parameters, tag, flags
-       1,    1,   39,    2, 0x06 /* Public */,
+       0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags
-       5,    1,   42,    2, 0x0a /* Public */,
-       7,    1,   45,    2, 0x0a /* Public */,
-       8,    1,   48,    2, 0x0a /* Public */,
-      11,    0,   51,    2, 0x0a /* Public */,
-
- // signals: parameters
-    QMetaType::Void, 0x80000000 | 3,    4,
+       1,    1,   24,    2, 0x0a /* Public */,
+       4,    1,   27,    2, 0x0a /* Public */,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    6,
-    QMetaType::Void, QMetaType::QString,    6,
-    QMetaType::Void, 0x80000000 | 9,   10,
-    QMetaType::Void,
+    QMetaType::Void, QMetaType::QString,    3,
+    QMetaType::Void, QMetaType::QString,    3,
 
        0        // eod
 };
@@ -90,21 +70,9 @@ void Watcher::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
     if (_c == QMetaObject::InvokeMetaMethod) {
         Watcher *_t = static_cast<Watcher *>(_o);
         switch (_id) {
-        case 0: _t->ruleUpdated((*reinterpret_cast< Rule(*)>(_a[1]))); break;
-        case 1: _t->on_file_changed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 2: _t->on_dir_changed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
-        case 3: _t->rulesUpdated((*reinterpret_cast< QList<Rule>(*)>(_a[1]))); break;
-        case 4: _t->stopWatching(); break;
+        case 0: _t->on_file_changed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
+        case 1: _t->on_dir_changed((*reinterpret_cast< const QString(*)>(_a[1]))); break;
         default: ;
-        }
-    } else if (_c == QMetaObject::IndexOfMethod) {
-        int *result = reinterpret_cast<int *>(_a[0]);
-        void **func = reinterpret_cast<void **>(_a[1]);
-        {
-            typedef void (Watcher::*_t)(Rule & );
-            if (*reinterpret_cast<_t *>(func) == static_cast<_t>(&Watcher::ruleUpdated)) {
-                *result = 0;
-            }
         }
     }
 }
@@ -134,21 +102,14 @@ int Watcher::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 5)
+        if (_id < 2)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 5;
+        _id -= 2;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 5)
+        if (_id < 2)
             *reinterpret_cast<int*>(_a[0]) = -1;
-        _id -= 5;
+        _id -= 2;
     }
     return _id;
-}
-
-// SIGNAL 0
-void Watcher::ruleUpdated(Rule & _t1)
-{
-    void *_a[] = { Q_NULLPTR, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_END_MOC_NAMESPACE

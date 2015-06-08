@@ -1,0 +1,95 @@
+{
+
+    "metadata" :
+    {
+        "formatVersion" : 3.1,
+        "sourceFile"    : "Wheel20.obj",
+        "generatedBy"   : "OBJConverter",
+        "vertices"      : 9919,
+        "faces"         : 10065,
+        "normals"       : 10144,
+        "uvs"           : 9125,
+        "materials"     : 5
+    },
+
+    "materials": [	{
+	"DbgColor" : 15658734,
+	"DbgIndex" : 0,
+	"DbgName" : "Material__230",
+	"colorAmbient" : [0.588, 0.588, 0.588],
+	"colorDiffuse" : [0.039216, 0.039216, 0.039216],
+	"colorSpecular" : [0.0, 0.0, 0.0],
+	"illumination" : 2,
+	"mapAmbient" : "tyrediff.jpg",
+	"mapBump" : "tyrebump.jpg",
+	"mapDiffuse" : "tyrediff.jpg",
+	"opticalDensity" : 1.6,
+	"shading" : "phong",
+	"specularCoef" : 50.0,
+	"transparency" : 0.0,
+	"transparent" : true
+	},
+
+	{
+	"DbgColor" : 15597568,
+	"DbgIndex" : 1,
+	"DbgName" : "Plastic_Brake_Main",
+	"colorAmbient" : [0.717647, 0.717647, 0.717647],
+	"colorDiffuse" : [0.717647, 0.717647, 0.717647],
+	"colorSpecular" : [0.0, 0.0, 0.0],
+	"illumination" : 2,
+	"opticalDensity" : 1.6,
+	"specularCoef" : 50.0,
+	"transparency" : 0.0,
+	"transparent" : true
+	},
+
+	{
+	"DbgColor" : 60928,
+	"DbgIndex" : 2,
+	"DbgName" : "Metal_Disk",
+	"colorAmbient" : [0.588, 0.588, 0.588],
+	"colorDiffuse" : [0.0, 0.0, 0.0],
+	"colorSpecular" : [0.0, 0.0, 0.0],
+	"illumination" : 2,
+	"mapAmbient" : "F40diff1.jpg",
+	"mapDiffuse" : "F40diff1.jpg",
+	"opticalDensity" : 1.6,
+	"specularCoef" : 50.0,
+	"transparency" : 0.0,
+	"transparent" : true
+	},
+
+	{
+	"DbgColor" : 238,
+	"DbgIndex" : 3,
+	"DbgName" : "Metal_Steel_3",
+	"colorAmbient" : [0.588, 0.588, 0.588],
+	"colorDiffuse" : [0.0, 0.0, 0.0],
+	"colorSpecular" : [0.819, 0.819, 0.819],
+	"illumination" : 2,
+	"opticalDensity" : 1.6,
+	"specularCoef" : 50.0,
+	"transparency" : 0.0,
+	"transparent" : true
+	},
+
+	{
+	"DbgColor" : 15658496,
+	"DbgIndex" : 4,
+	"DbgName" : "Plastic_Black_Logo",
+	"colorAmbient" : [0.588, 0.588, 0.588],
+	"colorDiffuse" : [0.05098, 0.05098, 0.05098],
+	"colorSpecular" : [0.0, 0.0, 0.0],
+	"illumination" : 2,
+	"mapAmbient" : "Brake_Logo.png",
+	"mapDiffuse" : "Brake_Logo.png",
+	"opticalDensity" : 1.6,
+	"specularCoef" : 50.0,
+	"transparency" : 0.0,
+	"transparent" : true
+	}],
+
+    "buffers": "{FILE_PATH_NO_EXT}.bin"
+
+}

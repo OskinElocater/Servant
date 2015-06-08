@@ -1,6 +1,7 @@
 #include "widget.h"
-#include "watcher.h"
+#include "watchermanager.h"
 #include "settings.h"
+#include "settingsloader.h"
 #include "rule.h"
 
 #include <QApplication>
@@ -13,28 +14,18 @@ int main(int argc, char *argv[])
     Widget widget;
     widget.show();
 
-    Watcher watcher;    
-
-    QObject::connect(&watcher, &Watcher::fileChanged,
-                     &watcher, &Watcher::on_file_changed);
-
-    QObject::connect(&watcher, &Watcher::directoryChanged,
-                     &watcher, &Watcher::on_dir_changed);
-
-    QObject::connect(&watcher, &Watcher::fileChanged,
-                     &widget, &Widget::fileChanged);
-
-    QObject::connect(&watcher, &Watcher::directoryChanged,
-                     &widget, &Widget::directoryChanged);
-
-    QObject::connect(&watcher, &Watcher::ruleUpdated,
-                     &widget, &Widget::onRuleUpdated);
+    WatcherManager watcherManager;
 
     QObject::connect(&widget, &Widget::rulesUpdated,
-                     &watcher, &Watcher::rulesUpdated);
+                     &watcherManager, &WatcherManager::rulesUpdated);
+
+    QObject::connect(&watcherManager, &WatcherManager::fileChanged,
+                     &widget, &Widget::fileChanged);
 
     QCoreApplication::setApplicationName("Servant");
     QCoreApplication::setOrganizationName("Alexander Oskin");
+
+    widget.onRulesUpdated(SettingsLoader::loadRules());
 
     return a.exec();
 }

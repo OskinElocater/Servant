@@ -1,55 +1,46 @@
 #ifndef WATCHER_H
 #define WATCHER_H
 
+#include <memory>
+
 #include <QFileSystemWatcher>
 #include <QWidget>
 #include <QProcess>
+#include <QDir>
 
-#include "widget.h"
+#include "rule.h"
+
+using std::shared_ptr;
 
 class Watcher : public QFileSystemWatcher
 {
     Q_OBJECT
 
 public:
-    void setDefaultDir(QString &path) { wDir = path; }
-    void setDefaultDirFilters(QStringList &filters) { wDirFilters = filters; }
-    void setDefaultFileFilters(QStringList &filters) { wFileFilters = filters; }    
-    void setDefaultCommand(QString &cmd) { wCmd = cmd; }
-    void setDefaultArgs(QStringList &args) { wArgs = args; }
+    Watcher(QFileSystemWatcher * parent = 0);
+    Watcher(shared_ptr<Rule> rule, QFileSystemWatcher * parent = 0);
 
-    QStringList& getDefaultDirFilters() { return wDirFilters; }
-    QStringList& getDefaultFileFilters() { return wFileFilters; }
-    QString& getDefaultDir() { return wDir; }
-    QString& getDefaultCommand() { return wCmd; }
-    QStringList& getDefaultArgs() { return wArgs; }
+    void start();
+    void refresh();
+    void stop();
+
+    shared_ptr<Rule> getRule() { return _rule; }
+    void setRule(shared_ptr<Rule> r) { _rule = r; refresh(); }
 
 public slots:
     void on_file_changed(const QString &path);
     void on_dir_changed(const QString &path);
 
-    void rulesUpdated(QList<Rule> rules);
-    void stopWatching();
-
-signals:
-    void ruleUpdated(Rule &rule);
-
 private:
-    void loadRules();
-
-    void addRuleRecursive(Rule &rule);
-    //void addPathRecursive(QString &path);
+    void addPathRecursive(QString &path);
+    QStringList addFilesInDir(QDir &dir);
     void removeAllPaths();
 
     void executeCommand(QString &cmd, QStringList &args);
 
-    std::shared_ptr<QMap<QString, Rule>> _rules;
+    void processVariables();
 
-    QString wDir;
-    QStringList wFileFilters;
-    QStringList wDirFilters;
-    QString wCmd;
-    QStringList wArgs;
+    shared_ptr<Rule> _rule;
 };
 
 #endif // WATCHER_H

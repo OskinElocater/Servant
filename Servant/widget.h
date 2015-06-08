@@ -1,11 +1,16 @@
 #ifndef WIDGET_H
 #define WIDGET_H
 
+#include <memory>
+
 #include <QWidget>
 #include <QTreeWidget>
 #include <QTreeWidgetItem>
+#include <QDir>
 
 #include "settings.h"
+
+using std::shared_ptr;
 
 namespace Ui {
     class Widget;
@@ -20,10 +25,9 @@ public:
     ~Widget();
 
 public slots:
-    void fileChanged(const QString &path);
+    void fileChanged(QString &ruleName, const QString &path);
     void directoryChanged(const QString &path);
-    void onRuleUpdated(Rule &rule);
-    void onRulesUpdated(QList<Rule> rules);
+    void onRulesUpdated(QVector<shared_ptr<Rule> > rules);
 
 private slots:
     void on_btn_settings_clicked();
@@ -33,14 +37,16 @@ private slots:
     void on_btn_stop_clicked();
 
 signals:
-    void rulesUpdated(QList<Rule> rules);
+    void rulesUpdated(QVector<shared_ptr<Rule>> rules);
     void stopWatching();
 
 private:
-    void updateTreeWidgetWithRule(Rule &rule, QTreeWidgetItem *parent);
-    void updateTreeWidgetWithRuleId(int &id, QTreeWidgetItem *parent);
+    void updateTreeWidgetWithPath(QString &path, QTreeWidgetItem *parent);
+    void addItemInDir(QDir &dir, QTreeWidgetItem *parent);
 
     //Settings& _settings;
+
+    shared_ptr<Rule> _currentRule;
 
     Ui::Widget *ui;  
 };

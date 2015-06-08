@@ -11,7 +11,7 @@ Rule::Rule(int ruleId):
     command(QString("")),
     arguments(QStringList(""))
 {
-    qDebug("Creating empty rule with id %i", id);
+    //qDebug("Creating empty rule with id %i", id);
 }
 
 Rule::Rule(QString &ruleName,
@@ -28,7 +28,7 @@ Rule::Rule(QString &ruleName,
     command(cmd),
     arguments(args)
 {
-    qDebug("Creating new rule with id %i", id);
+    //qDebug("Creating new rule with id %i", id);
 }
 
 Rule::Rule(const Rule & r):
@@ -40,11 +40,11 @@ Rule::Rule(const Rule & r):
     command(r.command),
     arguments(r.arguments)
 {
-    qDebug("Calling copy constructor for id %i", id);
+    //qDebug("Calling copy constructor for id %i", id);
 }
 
 Rule& Rule::operator=(const Rule& r) {
-    qDebug("Copying rule with id %i", id);
+    //qDebug("Copying rule with id %i", id);
     Rule newRule(QString(r.name),
                  QString(r.workingDirectory),
                  QStringList(r.directoryFilters),
@@ -59,5 +59,5 @@ Rule& Rule::operator=(const Rule& r) {
 
 Rule::~Rule() {    
     rules_count--;
-    qDebug("Destroying rule, new count is %i", rules_count);
+    //qDebug("Destroying rule, new count is %i", rules_count);
 }
