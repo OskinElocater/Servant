@@ -12,6 +12,10 @@ void WatcherManager::onFileChanged(const QString &path) {
     emit fileChanged(w->getRule()->name, path);
 }
 
+void WatcherManager::onNewMessage(const QString &msg) {
+    emit outputMessage(msg);
+}
+
 void WatcherManager::addWatcherWithRule(shared_ptr<Rule> rule) {
     auto newWatcher = make_shared<Watcher>(rule);
     newWatcher->start();
@@ -25,6 +29,9 @@ void WatcherManager::addWatcherWithRule(shared_ptr<Rule> rule) {
 
     QObject::connect(&*newWatcher, &Watcher::fileChanged,
                      this, &WatcherManager::onFileChanged);
+
+    QObject::connect(&*newWatcher, &Watcher::outputMessage,
+                     this, &WatcherManager::onNewMessage);
 }
 
 void WatcherManager::removeWatcherWithRule(shared_ptr<Rule> rule) {

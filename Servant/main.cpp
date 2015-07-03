@@ -22,6 +22,9 @@ int main(int argc, char *argv[])
     QObject::connect(&watcherManager, &WatcherManager::fileChanged,
                      &widget, &Widget::fileChanged);
 
+    QObject::connect(&watcherManager, &WatcherManager::outputMessage,
+                     &widget, &Widget::outputMessage);
+
     QCoreApplication::setApplicationName("Servant");
     QCoreApplication::setOrganizationName("Alexander Oskin");
 

@@ -16,9 +16,11 @@ class WatcherManager : public QObject
 public slots:
     void rulesUpdated(QVector<shared_ptr<Rule>> rules);
     void onFileChanged(const QString &path);
+    void onNewMessage(const QString& msg);
 
 signals:
     void fileChanged(QString &ruleName, const QString &filePath);
+    void outputMessage(const QString& msg);
 
 private:
     void addWatcherWithRule(shared_ptr<Rule> rule);

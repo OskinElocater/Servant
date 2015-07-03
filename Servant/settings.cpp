@@ -23,10 +23,14 @@ Settings::Settings(QWidget *parent) :
         s.setValue("IsFirstLaunch", false);
     }
 
-    _rules = SettingsLoader::loadRules();    
+    _rules = SettingsLoader::loadRules();
 
     Q_FOREACH(auto& r, _rules) {
-        //qDebug("Index of item %i", r->id);
+        /*qDebug("Args of rule %s are ", r->name.toUtf8().constData());
+        Q_FOREACH(auto& arg, r->arguments) {
+            qDebug("%s", arg.toUtf8().constData());
+        }*/
+
         QListWidgetItem *newItem = new QListWidgetItem(r->name);
         ui->listWidget->addItem(newItem);
     }
@@ -59,7 +63,7 @@ void Settings::on_listWidget_itemClicked(QListWidgetItem *item)
     ui->in_dirfs->setText(_currentRule->directoryFilters.join(", "));
     ui->in_filefs->setText(_currentRule->fileFilters.join(", "));
     ui->in_cmd->setText(_currentRule->command);
-    ui->in_args->setText(_currentRule->arguments.join(" "));
+    ui->in_args->setText(_currentRule->arguments.join(", "));
 }
 
 void Settings::on_btn_add_rule_clicked()
@@ -151,14 +155,14 @@ void Settings::on_in_wdir_editingFinished()
 void Settings::on_in_dirfs_editingFinished()
 {
     //qDebug("Editing dirFs finished!");
-    _currentRule->directoryFilters = ui->in_dirfs->text().split(", ",
+    _currentRule->directoryFilters = ui->in_dirfs->text().remove(" ").split(",",
                                                                 QString::SkipEmptyParts);
 }
 
 void Settings::on_in_filefs_editingFinished()
 {
     //qDebug("Editing fileFs finished!");
-    _currentRule->fileFilters = ui->in_filefs->text().split(", ",
+    _currentRule->fileFilters = ui->in_filefs->text().remove(" ").split(",",
                                                             QString::SkipEmptyParts);
 }
 
@@ -171,7 +175,7 @@ void Settings::on_in_cmd_editingFinished()
 void Settings::on_in_args_editingFinished()
 {
     //qDebug("Editing args finished!");
-    _currentRule->arguments = ui->in_args->text().split(QRegExp("\\s"),
+    _currentRule->arguments = ui->in_args->text().remove(" ").split(",",
                                                         QString::SkipEmptyParts);
     Q_FOREACH(auto a, _currentRule->arguments)
         qDebug("%s", a.toUtf8().constData());

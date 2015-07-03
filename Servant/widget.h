@@ -28,6 +28,7 @@ public slots:
     void fileChanged(QString &ruleName, const QString &path);
     void directoryChanged(const QString &path);
     void onRulesUpdated(QVector<shared_ptr<Rule> > rules);
+    void outputMessage(const QString& msg);
 
 private slots:
     void on_btn_settings_clicked();

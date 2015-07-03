@@ -28,8 +28,6 @@ public:
                                                    settings.value("fileFilters").toStringList(),
                                                    settings.value("command").toString(),
                                                    settings.value("args").toStringList());
-
-            //r->id = settings.value("id", -1).toInt(); // This may be bad!
             ret.push_back(r);
             settings.endGroup();
         }

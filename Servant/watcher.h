@@ -11,6 +11,7 @@
 #include "rule.h"
 
 using std::shared_ptr;
+using std::unique_ptr;
 
 class Watcher : public QFileSystemWatcher
 {
@@ -31,6 +32,9 @@ public slots:
     void on_file_changed(const QString &path);
     void on_dir_changed(const QString &path);
 
+signals:
+    void outputMessage(const QString& msg);
+
 private:
     void addPathRecursive(QString &path);
     QStringList addFilesInDir(QDir &dir);
@@ -38,8 +42,9 @@ private:
 
     void executeCommand(QString &cmd, QStringList &args);
 
-    void processVariables();
+    QStringList processArgumentsForFile(const QString& filePath);
 
+    unique_ptr<QProcess> _pr;
     shared_ptr<Rule> _rule;
 };
 

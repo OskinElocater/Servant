@@ -35,7 +35,7 @@ void Widget::directoryChanged(const QString &path)
 }
 
 void Widget::onRulesUpdated(QVector<shared_ptr<Rule>> rules) {
-    qDebug("Widget: Rules updated! Updating tree view...");
+    //qDebug("Widget: Rules updated! Updating tree view...");
     ui->output->append("Rules changed! Updating...");
 
     emit rulesUpdated(rules);
@@ -53,6 +53,10 @@ void Widget::onRulesUpdated(QVector<shared_ptr<Rule>> rules) {
     }
 
     _currentRule.reset();
+}
+
+void Widget::outputMessage(const QString &msg) {
+    ui->output->append(msg);
 }
 
 void Widget::updateTreeWidgetWithPath(QString &path, QTreeWidgetItem *parent) {
